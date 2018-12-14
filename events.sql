@@ -1,7 +1,0 @@
--- Name
--- Datum
--- Veranstalter
--- Sonstiges
--- Volle Beschreibung
--- Ort
--- Link

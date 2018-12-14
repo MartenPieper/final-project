@@ -12,11 +12,14 @@ const store = createStore(reducer, composeWithDevTools(applyMiddleware(reduxProm
 
 let component;
 
-if (location.pathname === "") {
+if (location.pathname === "/welcome") {
   // render welcome
-  <Provider store={store}>
-      <App />
-  </Provider>);
+
+} else {
+    component = (
+    <Provider store={store}>
+        <App />
+    </Provider>);
 }
 
 

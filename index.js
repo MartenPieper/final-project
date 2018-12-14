@@ -5,6 +5,15 @@ const bodyParser = require("body-parser");
 const csurf = require("csurf");
 const db = require("./db");
 
+const cookieSession = require('cookie-session');
+
+app.use(
+  cookieSession({
+    secret: process.env.SESSION_SECRET || require("./secrets").secret, // process.env.SESSION_SECRET || require("./passwords").sessionSecret // Old secret "nobody knows this secret but me"
+    maxAge: 1000 * 60 * 60 * 24 * 7 * 6
+  })
+);
+
 app.use(compression());
 
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -16,12 +25,6 @@ app.use(
   })
 );
 
-app.use(
-  cookieSession({
-    secret: process.env.SESSION_SECRET || require("./secrets").secret, // process.env.SESSION_SECRET || require("./passwords").sessionSecret // Old secret "nobody knows this secret but me"
-    maxAge: 1000 * 60 * 60 * 24 * 7 * 6
-  })
-);
 
 app.use(csurf());
 
