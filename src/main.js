@@ -4,7 +4,8 @@ import SearchInput from "./searchinput"
 export default function Main(props) {
     return (
         <div id="main-container">
-        <div>Main Works</div>
+        <div >Main Works</div>
+        <button  onClick={props.showLogin}></button>
             <SearchInput />
         </div>
     );

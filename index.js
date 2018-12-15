@@ -4,7 +4,7 @@ const compression = require('compression');
 const bodyParser = require("body-parser");
 const csurf = require("csurf");
 const db = require("./db");
-
+var bcrypt = require("./bcrypt");
 const cookieSession = require('cookie-session');
 
 app.use(
@@ -64,6 +64,65 @@ app.post("/getSearchUpdate", (req, res) => {
     // }
 
 })
+
+app.post("/login", (req, res) => {
+    // Pass Email to db query -> If error, redirct to login page
+    db.getUser(req.body.email)
+        .then(results => {
+            // console.log("results in login", results.rows[0])
+            var userId = results.rows[0].id
+            return bcrypt
+                .compare(req.body.password, results.rows[0].password)
+                .then((matches) => {
+                    console.log("req.session.userId in registration", req.session.userId);
+                    if (matches == true) {
+                        req.session.userId = userId
+                        res.json({
+                          success: true
+                        });
+                    } else {
+                        throw new Error();
+
+                    }
+                });
+        }).catch(err => {
+            console.log("Error in POST /login", err);
+
+            res.json({
+              success: false
+            });
+
+        });
+});
+
+app.post("/registration", (req, res) => {
+  bcrypt
+    .hash(req.body.password)
+    .then((hash) => {
+      return db.createLogin(
+        req.body.first,
+        req.body.last,
+        req.body.email,
+        hash
+      );
+    })
+    .then((results) => {
+      // console.log("results in app.post /registration", results);
+      req.session.userId = results.rows[0].id;
+      console.log("req.session.userId in registration", req.session.userId);
+      res.json({
+        success: true
+      });
+    })
+    .catch((err) => {
+      console.log("error: ", err);
+      res.json(
+        err.column
+      );
+    });
+ //  console.log("req.body in /registration", req.body);
+
+});
 
 app.get('*', function(req, res) {
     res.sendFile(__dirname + '/index.html');

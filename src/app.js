@@ -4,7 +4,7 @@ import Logo from "./logo";
 import { BrowserRouter, Route } from 'react-router-dom';
 import Main from "./main"
 import Login from "./login"
-
+import Registration from "./registration"
 export default class App extends React.Component {
     constructor() {
         super();
@@ -16,12 +16,14 @@ export default class App extends React.Component {
     }
 
     showLogin() {
+        console.log("showLogin clicked")
         this.setState({
             loginIsVisible: true
         });
     }
 
     hideLogin(){
+        console.log("hideLogin clicked")
         this.setState({
             loginIsVisible: false
         });
@@ -42,7 +44,10 @@ export default class App extends React.Component {
                     <div>
                         <Route exact path="/"
                         render = {() => {
-                            return <Main />
+                            return <Main
+                            showLogin = {this.showLogin}
+
+                             />
                         }}
                         />
 
@@ -53,6 +58,8 @@ export default class App extends React.Component {
                     hideLogin = {this.hideLogin}
                     loginIsVisible = {this.state.loginIsVisible}
                     />
+
+                        <Route path="/registration" component = { Registration } />
 </div>
             </BrowserRouter>
 

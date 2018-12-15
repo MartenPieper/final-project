@@ -4,15 +4,12 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
+import { Link } from "react-router-dom";
 
-
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50 ;
+  const left = 50 ;
 
   return {
     top: `${top}%`,
@@ -103,13 +100,10 @@ class Login extends React.Component {
                             </div>
 
                               <button className ="button-one">Login</button>
+
+
                             </form>
-
-                <form onSubmit = { this.handleSubmit }>
-                    <input name= "file" onChange = { this.handleChange } type ="file" accept="image/*" />
-                    <button className="button-one">Upload</button>
-                </form>
-
+                            <Link onClick={this.props.hideLogin} to="/registration">Click here to registration</Link>
 
                 <SimpleModalWrapped />
                 </div>
