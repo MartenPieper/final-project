@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Select from 'react-select';
-import { studyDirection, lawAndEconomy, teaching } from '../data';
+import { studyDirection, lawAndEconomy, teaching, stem, naturalScience, socialStudies, mediaStudies, medicalStudies, artStudies, languageStudies, agriculturalStudies } from '../data';
 import { addSearchQuery} from "./actions"
 import { connect } from 'react-redux';
 
@@ -20,7 +20,11 @@ export default connect()((props) => (
     options={studyDirection}
     className="basic-multi-select"
     classNamePrefix="select"
-    onChange = {e => (props.dispatch(addSearchQuery("study", e)))}
+    onChange = {(e) =>
+        {
+            const action = props.dispatch(addSearchQuery("study", e));
+        action.then(() => props.handleSearch())
+    }}
   />
   </div>
 ));

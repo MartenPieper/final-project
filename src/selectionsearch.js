@@ -10,6 +10,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
+import { addSearchQuery} from "./actions"
+import { connect } from 'react-redux';
+
 
 const styles = theme => ({
   root: {
@@ -65,8 +68,8 @@ function getStyles(name, that) {
 }
 
 class MultipleSelect extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
   this.state = {
     name: [],
   };
@@ -76,7 +79,16 @@ class MultipleSelect extends React.Component {
 
   handleChange(event) {
     this.setState({ name: event.target.value });
+    console.log("this.state in selectsearch", this.state);
+
+    const action = this.props.dispatch(addSearchQuery("selections", event.target.value));
+    action.then(() => this.props.handleSearch())
+
+
   };
+
+
+
 
   handleChangeMultiple(event) {
     const { options } = event.target;
@@ -89,6 +101,7 @@ class MultipleSelect extends React.Component {
     this.setState({
       name: value,
     });
+    console.log("this.state in selectsearch for ChangeMultiple", this.state)
   };
 
   render() {
@@ -125,4 +138,5 @@ MultipleSelect.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(MultipleSelect);
+
+export default connect()(withStyles(styles, { withTheme: true })(MultipleSelect));

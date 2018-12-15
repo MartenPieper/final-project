@@ -13,7 +13,7 @@ const MyComponent = () => (
 
 export default connect()((props) => (
     <div>
-    <div>StudySearch</div>
+    <div>TermSearch</div>
   <Select
 
     isMulti
@@ -21,7 +21,11 @@ export default connect()((props) => (
     options={groupedOptions}
     className="basic-multi-select"
     classNamePrefix="select"
-    onChange = {e => (props.dispatch(addSearchQuery("study", e)))}
+    onChange = {(e) =>
+        {
+            const action = props.dispatch(addSearchQuery("terms", e));
+        action.then(() => props.handleSearch())
+    }}
   />
   </div>
 ));

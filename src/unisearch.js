@@ -19,7 +19,11 @@ export default connect()((props) => (
     options={unis}
     className="basic-multi-select"
     classNamePrefix="select"
-    onChange = {e => (props.dispatch(addSearchQuery("unis", e)))}
+    onChange = {(e) =>
+        {
+            const action = props.dispatch(addSearchQuery("unis", e));
+        action.then(() => props.handleSearch())
+    }}
   />
   </div>
 ));

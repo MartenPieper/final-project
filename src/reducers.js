@@ -8,8 +8,12 @@ export default function reducer(state = {}, action) {
 
     if (action.type == "ADD_SEARCH_QUERY") {
         console.log("action in reducer", action)
+
+const queryInput = state[action.queryInput]
+// || []
+
         return {
-            ...state, searchQuery: action.searchInput
+            ...state, [action.queryInput]: action.searchInput
         }
     }
 

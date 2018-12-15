@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
-import { places } from "../data"
+import { placesIndex } from "../data"
 import { addSearchQuery} from "./actions"
 import { connect } from 'react-redux';
 
 
 const MyComponent = () => (
-  <Select options={places} />
+  <Select options={placesIndex} />
 )
-
+// handleChange(e) {
+//     props.dispatch(addSearchQuery("places", e));
+//     props.handleSearch();
+// };
 
 export default connect()((props) => (
     <div>
@@ -18,18 +21,16 @@ export default connect()((props) => (
 
     isMulti
     name="colors"
-    options={places}
+    options={placesIndex}
     className="basic-multi-select"
     classNamePrefix="select"
-    onChange = {e => (props.dispatch(addSearchQuery("places", e)))}
+    onChange = {(e) =>
+        {
+            const action = props.dispatch(addSearchQuery("places", e));
+        action.then(() => props.handleSearch())
+    }} // try to put handleSearch in .then
+
   />
 
   </div>
 ));
-
-// onChange={this.handleChange}
-
-// handleChange(e) {
-//
-//     console.log("e.target.value", e.target.value)
-// };

@@ -46,6 +46,25 @@ if (process.env.NODE_ENV != 'production') {
     app.use('/bundle.js', (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
+app.post("/getSearchUpdate", (req, res) => {
+    console.log("req.body", req.body)
+    // db.getSearchResults(req.body).then(results => {
+    //
+    //     console.log("results", results)
+    //
+    // }).catch( err => {
+    //     console.log("error in app.get /getSearchUpdate")
+    // })
+
+    // let q = `SELECT * FROM places FULL (?)JOIN universities FULL JOIN studies WHERE`
+    //
+    // if (data.places) {
+    //     q+= `places = $1`
+    //     params.push(data.places)
+    // }
+
+})
+
 app.get('*', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
