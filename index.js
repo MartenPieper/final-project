@@ -7,13 +7,6 @@ const db = require("./db");
 var bcrypt = require("./bcrypt");
 const cookieSession = require('cookie-session');
 
-app.use(
-  cookieSession({
-    secret: process.env.SESSION_SECRET || require("./secrets").secret, // process.env.SESSION_SECRET || require("./passwords").sessionSecret // Old secret "nobody knows this secret but me"
-    maxAge: 1000 * 60 * 60 * 24 * 7 * 6
-  })
-);
-
 app.use(compression());
 
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -25,6 +18,13 @@ app.use(
   })
 );
 
+app.use(
+  cookieSession({
+    secret: process.env.SESSION_SECRET || require("./secrets").secret, // process.env.SESSION_SECRET || require("./passwords").sessionSecret // Old secret "nobody knows this secret but me"
+    maxAge: 1000 * 60 * 60 * 24 * 7 * 6
+  })
+);
+
 
 app.use(csurf());
 
@@ -32,6 +32,11 @@ app.use((req, res, next) => {
     res.cookie('mytoken', req.csrfToken());
     next();
 });
+
+// app.use(function(req, res, next) {
+//   res.locals.csrfToken = req.csrfToken();
+//   next();
+// });
 
 app.use(express.static("./public"));
 
@@ -69,7 +74,7 @@ app.post("/login", (req, res) => {
     // Pass Email to db query -> If error, redirct to login page
     db.getUser(req.body.email)
         .then(results => {
-            // console.log("results in login", results.rows[0])
+             console.log("results in login", results.rows[0])
             var userId = results.rows[0].id
             return bcrypt
                 .compare(req.body.password, results.rows[0].password)
@@ -122,6 +127,12 @@ app.post("/registration", (req, res) => {
     });
  //  console.log("req.body in /registration", req.body);
 
+});
+
+app.get("/logout", (req, res) => {
+    // console.log("logout Route runnning")
+    req.session = null;
+    console.log("logged out worked")
 });
 
 app.get('*', function(req, res) {

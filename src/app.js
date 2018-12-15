@@ -5,14 +5,19 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Main from "./main"
 import Login from "./login"
 import Registration from "./registration"
+
+
 export default class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            loginIsVisible: false
+            loginIsVisible: false,
+            registrationIsVisible: false
         };
         this.showLogin = this.showLogin.bind(this);
         this.hideLogin = this.hideLogin.bind(this);
+        this.showRegistration = this.showRegistration.bind(this);
+        this.hideRegistration = this.hideRegistration.bind(this)
     }
 
     showLogin() {
@@ -29,6 +34,19 @@ export default class App extends React.Component {
         });
     }
 
+    showRegistration() {
+        console.log("showRegistration clicked")
+        this.setState({
+            registrationIsVisible: true
+        });
+    }
+
+    hideRegistration(){
+        console.log("hideRegistration clicked")
+        this.setState({
+            registrationIsVisible: false
+        });
+    }
 
 
 
@@ -56,7 +74,14 @@ export default class App extends React.Component {
                     <Login
 
                     hideLogin = {this.hideLogin}
+                    showRegistration = {this.showRegistration}
                     loginIsVisible = {this.state.loginIsVisible}
+                    />
+
+                    <Registration
+                    hideRegistration = {this.hideRegistration}
+                    showLogin = {this.showLogin}
+                    registrationIsVisible = {this.state.registrationIsVisible}
                     />
 
                         <Route path="/registration" component = { Registration } />

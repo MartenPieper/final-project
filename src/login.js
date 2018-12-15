@@ -33,6 +33,7 @@ class Login extends React.Component {
 
     constructor(props) {
         super(props)
+        this.state = {}
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -49,14 +50,16 @@ class Login extends React.Component {
 
     handleSubmit(e) {
       e.preventDefault();
-      // console.log("handleSubmit running!!", this.state);
+      console.log("handleSubmit running!!", this.state);
       axios.post("/login", this.state).then(resp => {
-        // console.log("resp in the then of POST / login", resp);
+          console.log("resp in the then of POST / login", resp);
 
         // if everything does well:
         if (resp.data.success) {
           this.setState({ success: true });
-          location.replace("/");
+          console.log("login successful")
+               this.props.hideLogin()
+          // location.replace("/");
         } else {
           this.setState({ error: true });
         }
@@ -77,6 +80,7 @@ class Login extends React.Component {
          <div style={getModalStyle()} className={classes.paper}>
             <div className="closingbutton" onClick={this.props.hideLogin}>X</div>
             <br />
+
                 <h1>Please login</h1>
                 <form className="form" onSubmit={this.handleSubmit}>
 
@@ -103,7 +107,9 @@ class Login extends React.Component {
 
 
                             </form>
-                            <Link onClick={this.props.hideLogin} to="/registration">Click here to registration</Link>
+                            <button onClick={()=>{this.props.hideLogin(); this.props.showRegistration()}}>To Registration</button>
+
+
 
                 <SimpleModalWrapped />
                 </div>
