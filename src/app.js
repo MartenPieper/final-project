@@ -8,19 +8,35 @@ import Registration from "./registration"
 import DetailedExpansionPanel from "./resultspanel"
 import Typewriter from "./typewrite"
 import { connect } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 // import Push from "./push"  In JSX <Push />
+import Uploader from "./uploader";
+import Profile from "./profile";
+
+const style = {
+    Paper: { padding: 20 }
+}
+
+
 
  class App extends React.Component {
     constructor() {
         super();
         this.state = {
             loginIsVisible: false,
-            registrationIsVisible: false
+            registrationIsVisible: false,
+            setBio: "",
+            uploaderIsVisible: false,
         };
         this.showLogin = this.showLogin.bind(this);
         this.hideLogin = this.hideLogin.bind(this);
         this.showRegistration = this.showRegistration.bind(this);
-        this.hideRegistration = this.hideRegistration.bind(this)
+        this.hideRegistration = this.hideRegistration.bind(this);
+        this.showUploader = this.showUploader.bind(this);
+        this.changePic = this.changePic.bind(this);
+        this.hideUploader = this.hideUploader.bind(this);
+        this.setBio = this.setBio.bind(this);
     }
 
     showLogin() {
@@ -51,53 +67,115 @@ import { connect } from 'react-redux';
         });
     }
 
+    showUploader() {
+        this.setState({
+            uploaderIsVisible: true
+        });
+    }
+
+    hideUploader(){
+        this.setState({
+            uploaderIsVisible: false
+        });
+    }
+
+    changePic(url) {
+        this.setState({
+            profilePicUrl: url,
+            uploaderIsVisible: false
+        });
+}
+
+    setBio(bio) {
+        this.setState({
+            bio: bio
+        })
+    }
 
 
 // #1 it renders the page
     render() {
         return (
-        <div>
 
-        <div> Hey</div>
-            <Logo />
 
-            <Typewriter />
 
+<Grid container spacing={8}
+direction="row"
+  justify="center"
+  alignItems="flex-start">
+
+<Grid item xs={12} sm={12} lg={12}>
+<Paper style={style.Paper}>
+<Logo />
+
+<Typewriter />
+Heeeiiia
+</Paper>
+</Grid>
+
+<Grid item xs={10} sm={2} lg={4}>
+
+<Paper style={style.Paper}>
+
+    <Profile
+        id={this.state.id}
+        first={this.state.first}
+        last={this.state.last}
+        profilePicUrl={this.state.profilePicUrl}
+        bio={this.state.bio}
+        setBio={this.setBio}
+        showUploader={this.showUploader}
+        showLogin = {this.showLogin}
+                            />
+Hellooo
+
+<Uploader
+                    userID = {this.state.userId}
+                    changePic = {this.changePic}
+                    hideUploader = {this.hideUploader}
+                    uploaderIsVisible = {this.state.uploaderIsVisible}
+                />
+
+
+
+</Paper>
+</Grid>
+
+<Grid item xs={12} sm={8} lg={6}>
+
+<Registration
+hideRegistration = {this.hideRegistration}
+showLogin = {this.showLogin}
+registrationIsVisible = {this.state.registrationIsVisible}
+/>
+
+<Login
+hideLogin = {this.hideLogin}
+showRegistration = {this.showRegistration}
+loginIsVisible = {this.state.loginIsVisible}
+/>
 
             <BrowserRouter>
                     <div>
+                    <Paper style={style.Paper}>
                         <Route exact path="/"
                         render = {() => {
                             return <Main
-                            showLogin = {this.showLogin}
+
 
                              />
                         }}
                         />
-
-
-
-                    <Login
-
-                    hideLogin = {this.hideLogin}
-                    showRegistration = {this.showRegistration}
-                    loginIsVisible = {this.state.loginIsVisible}
-                    />
-
-                    <Registration
-                    hideRegistration = {this.hideRegistration}
-                    showLogin = {this.showLogin}
-                    registrationIsVisible = {this.state.registrationIsVisible}
-                    />
-
-                        <Route path="/registration" component = { Registration } />
-
+</Paper>
+<Paper style={style.Paper}>
                         <DetailedExpansionPanel
                         resultsArray = {this.props.resultsArray} />
-</div>
+</Paper>
+                        </div>
             </BrowserRouter>
+            </Grid>
+</Grid>
 
-        </div>
     );
     }
 }

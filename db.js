@@ -24,3 +24,23 @@ exports.createLogin = (first, last, email, password) => {
     [first || null, last || null, email || null, password || null]
   );
 };
+
+exports.uploadBio = (id, bio) => {
+    return db.query(
+         `UPDATE accounts
+         SET bio = $2
+         WHERE id = $1
+         RETURNING id, bio`,
+         [id, bio]
+    );
+}
+
+exports.uploadProfilePic = (id, profilepic) => {
+    return db.query(
+         `UPDATE accounts
+         SET profilepic = $2
+         WHERE id = $1
+         RETURNING id, profilepic`,
+         [id, profilepic]
+    );
+};

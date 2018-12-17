@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 export default function Logo() {
   return (
       <div>
-        
-        <img src="./logo.jpg" height="42" width="42" />
+
+        <img src="./logo.png" height="160" width="160" />
 
       </div>
   );

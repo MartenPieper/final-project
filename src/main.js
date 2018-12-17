@@ -5,7 +5,7 @@ export default function Main(props) {
     return (
         <div id="main-container">
         <div >Main Works</div>
-        <button  onClick={props.showLogin}>Login</button>
+        
             <SearchInput />
         </div>
     );

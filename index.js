@@ -9,8 +9,31 @@ const cookieSession = require('cookie-session');
 const meetup = require("meetup-api");
 const request = require('request');
 var sanitizeHtml = require('sanitize-html');
+const s3 = require("./s3");
 
+var multer = require("multer");
+var uidSafe = require("uid-safe");
+var path = require("path");
+app.use(bodyParser.json());
 
+var diskStorage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function(req, file, callback) {
+        uidSafe(24).then(function(uid) {
+            // uidSafe takes the image name and makes it into a 24 character unique name.
+            callback(null, uid + path.extname(file.originalname));
+        });
+    }
+});
+
+var uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152 // Files you upload cannot be greater than 2MB
+    }
+});
 
 app.use(compression());
 
@@ -193,6 +216,43 @@ app.post("/registration", (req, res) => {
  //  console.log("req.body in /registration", req.body);
 
 });
+
+app.post("/upload", uploader.single("file"), s3.upload, (req,res) => {
+    // console.log("req.file in app.post", req.file)
+    const configLink = "https://s3.amazonaws.com/studetscout/";
+    let s3Url = configLink + req.file.filename
+
+    // console.log("s3Url", s3Url)
+    // console.log("req.session.userId", req.session.userId)
+
+
+    if(req.file) {
+        db.uploadProfilePic(req.session.userId, s3Url).then(results => {
+            // console.log("results in uploadProfilePic", results)
+            res.json({
+                id:  results.rows[0].id,
+                imgurl: results.rows[0].profilepic})
+        }).catch(err => {
+            console.log("error in app.post", err)
+        });
+    } else {
+        res.json({
+            success: false
+        });
+    }
+})
+
+app.post("/bio", (req,res) => {
+    // console.log("req.body of app.post /bio", req.body)
+    db.uploadBio(req.session.userId, req.body.bio).then(results => {
+        // console.log("results in uploadBio", results)
+        res.json({
+            id:  results.rows[0].id,
+            bio: results.rows[0].bio})
+    }).catch(err => {
+        console.log("error in app.post", err)
+    });
+})
 
 app.get("/logout", (req, res) => {
     // console.log("logout Route runnning")

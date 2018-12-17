@@ -61,7 +61,7 @@ function DetailedExpansionPanel(props) {
                       return (
         <div className="online-user" key={result.id}>
 
-      <ExpansionPanel defaultExpanded>
+      <ExpansionPanel >
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <div className={classes.column}>
             <Typography className={classes.heading}>
