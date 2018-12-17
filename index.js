@@ -80,13 +80,14 @@ app.post("/getSearchUpdate", (req, res) => {
     //     console.log("error in meetup API call", err)
     // });
 
-
+console.log(req.body.selections.includes('Events/ Veranstaltungen'))
+if (req.body.selections.includes('Events/ Veranstaltungen')) {
     var baseUrl = `https://api.meetup.com/2/open_events?key=2c6569527c17491e136741596d14249&status=upcoming&sign=true&photo-host=public&country=de&page=20`
     if (req.body.terms) {
 
         // might have to do a for in loop to access all req.body.terms baseUrl += "&terms=" req.body.terms[elem]
         console.log("req.body.terms", req.body.terms)
-        baseUrl += `&terms=${req.body.terms}`
+        baseUrl += `&topic=${req.body.terms[0].topic}`
     }
 
     if (req.body.places && req.body.places[0].state) {
@@ -99,17 +100,26 @@ app.post("/getSearchUpdate", (req, res) => {
         baseUrl += `&city=${req.body.places[0].value}`
     }
 
+    if (req.body.study) {
+        baseUrl += `&topic=${req.body.terms[0].topic}`
+    }
+
+
+
 console.log(baseUrl)
     request(baseUrl, function (error, response, body) {
       console.log('error:', error); // Print the error if one occurred
       console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
       console.log('body:', body); // Print the HTML for the Google homepage.
+      var parsedResults = JSON.parse(body)
+      res.json(parsedResults)
     });
 
     // works for "city" in console: https://api.meetup.com/2/open_events?status=upcoming&sign=true&photo-host=public&country=de&city=berlin&page=20&&sign=true
 
     // works for topic in console: /2/open_events?status=upcoming&sign=true&photo-host=public&country=de&topic=3d-artists&page=20
     // https://www.meetup.com/cities/de/berlin/
+    }
 })
 
 app.post("/login", (req, res) => {

@@ -113,12 +113,14 @@ class MultipleSelect extends React.Component {
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="select-multiple-checkbox">Tag</InputLabel>
           <Select
+          
             multiple
             value={this.state.name}
             onChange={this.handleChange}
             input={<Input id="select-multiple-checkbox" />}
             renderValue={selected => selected.join(', ')}
             MenuProps={MenuProps}
+
           >
             {names.map(name => (
               <MenuItem key={name} value={name}>

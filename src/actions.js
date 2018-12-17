@@ -10,3 +10,11 @@ export async function addSearchQuery(query, input) {
         searchInput: input
     };
 }
+
+export async function addResults(results) {
+    console.log("results in actions.js", results)
+    return {
+        type: 'ADD_RESULTS',
+        resultsInput: results
+    }
+}

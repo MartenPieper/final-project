@@ -7,6 +7,7 @@ import UniSearch from "./unisearch"
 import TermSearch from "./termsearch"
 import DetailedSearch from "./detailedsearch"
 import { connect } from 'react-redux';
+import { addResults } from './actions';
 
 
 class SearchInput extends React.Component {
@@ -20,7 +21,9 @@ class SearchInput extends React.Component {
         console.log("query", this.props.query)
         var queryInput = this.props.query
         axios.post("/getSearchUpdate", queryInput).then(resp => {
-            console.log("resp", resp)
+            console.log("resp.data.results", resp.data.results)
+
+            this.props.dispatch(addResults(resp.data.results));
         })
     }
 

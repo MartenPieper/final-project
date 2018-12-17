@@ -14,6 +14,7 @@ import Divider from '@material-ui/core/Divider';
 import SimpleCard from "./resultscard"
 
 
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -52,14 +53,32 @@ const styles = theme => ({
 function DetailedExpansionPanel(props) {
   const { classes } = props;
   return (
-    <div className={classes.root}>
+      <div className={classes.root}>
+
+
+      {props.resultsArray && props.resultsArray.map(
+                  onlineUser => {
+                      return (
+                          <div className="online-user" key={onlineUser.id}>
+
+                          {onlineUser.name}
+                        
+                          </div>
+                      )
+                  }
+                  )}
+
+
       <ExpansionPanel defaultExpanded>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <div className={classes.column}>
-            <Typography className={classes.heading}>Location</Typography>
+            <Typography className={classes.heading}>
+
+
+            Location</Typography>
           </div>
           <div className={classes.column}>
-            <Typography className={classes.secondaryHeading}>Select trip destination</Typography>
+            <Typography className={classes.secondaryHeading}></Typography>
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.details}>
@@ -87,11 +106,26 @@ function DetailedExpansionPanel(props) {
         </ExpansionPanelActions>
       </ExpansionPanel>
     </div>
-  );
+)
 }
+
+
+
+
+
+
 
 DetailedExpansionPanel.propTypes = {
   classes: PropTypes.object.isRequired,
 };
+
+
+function mapStateToProps(state) {
+    console.log("State in mapStateToProps in resultspanel", state)
+var list = state.results;
+return {
+    resultsArray: state.results
+};
+}
 
 export default withStyles(styles)(DetailedExpansionPanel);

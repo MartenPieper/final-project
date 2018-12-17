@@ -7,9 +7,10 @@ import Login from "./login"
 import Registration from "./registration"
 import DetailedExpansionPanel from "./resultspanel"
 import Typewriter from "./typewrite"
+import { connect } from 'react-redux';
 // import Push from "./push"  In JSX <Push />
 
-export default class App extends React.Component {
+ class App extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -91,7 +92,8 @@ export default class App extends React.Component {
 
                         <Route path="/registration" component = { Registration } />
 
-                        <DetailedExpansionPanel />
+                        <DetailedExpansionPanel
+                        resultsArray = {this.props.resultsArray} />
 </div>
             </BrowserRouter>
 
@@ -99,3 +101,14 @@ export default class App extends React.Component {
     );
     }
 }
+
+function mapStateToProps(state) {
+    console.log("State in mapStateToProps in resultspanel", state)
+var list = state.results;
+return {
+    resultsArray: state.results
+};
+
+}
+
+export default connect(mapStateToProps)(App)
