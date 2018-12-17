@@ -57,25 +57,19 @@ function DetailedExpansionPanel(props) {
 
 
       {props.resultsArray && props.resultsArray.map(
-                  onlineUser => {
+                  result => {
                       return (
-                          <div className="online-user" key={onlineUser.id}>
-
-                          {onlineUser.name}
-                        
-                          </div>
-                      )
-                  }
-                  )}
-
+        <div className="online-user" key={result.id}>
 
       <ExpansionPanel defaultExpanded>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <div className={classes.column}>
             <Typography className={classes.heading}>
-
-
-            Location</Typography>
+            {result.name}
+            </Typography>
+          </div>
+          <div className={classes.column}>
+            <Typography className={classes.secondaryHeading}>{result.description.split(" ").splice(0,10).join(" ") + "..."}</Typography>
           </div>
           <div className={classes.column}>
             <Typography className={classes.secondaryHeading}></Typography>
@@ -84,15 +78,19 @@ function DetailedExpansionPanel(props) {
         <ExpansionPanelDetails className={classes.details}>
           <div className={classes.column} />
           <div className={classes.column}>
-          <SimpleCard />
-            <Chip label="Barbados" className={classes.chip} onDelete={() => {}} />
+          <div className={classes.column}>
+            <Typography className={classes.secondaryHeading}>{result.description.split(" ").splice(10,result.description.length).join(" ")}</Typography>
+          </div>
+
+
+
           </div>
           <div className={classNames(classes.column, classes.helper)}>
             <Typography variant="caption">
-              Select your destination of choice
+              Interessiert?
               <br />
-              <a href="#sub-labels-and-columns" className={classes.link}>
-                Learn more
+              <a href={result.event_url} className={classes.link}>
+                Zur Webseite
               </a>
             </Typography>
           </div>
@@ -105,6 +103,13 @@ function DetailedExpansionPanel(props) {
           </Button>
         </ExpansionPanelActions>
       </ExpansionPanel>
+
+
+      </div>
+     )
+     }
+     )}
+
     </div>
 )
 }

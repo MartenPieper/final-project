@@ -8,6 +8,9 @@ var bcrypt = require("./bcrypt");
 const cookieSession = require('cookie-session');
 const meetup = require("meetup-api");
 const request = require('request');
+var sanitizeHtml = require('sanitize-html');
+
+
 
 app.use(compression());
 
@@ -111,7 +114,17 @@ console.log(baseUrl)
       console.log('error:', error); // Print the error if one occurred
       console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
       console.log('body:', body); // Print the HTML for the Google homepage.
-      var parsedResults = JSON.parse(body)
+
+
+      var parsedResults = JSON.parse(body);
+      console.log("parsedResults", parsedResults)
+
+// var cleanedResults
+//       for (var desc in parsedResults) {
+//            cleanedResults += sanitizeHtml(parsedResults.results.description);
+//       }
+//       console.log("cleanedResults", cleanedResults)
+
       res.json(parsedResults)
     });
 

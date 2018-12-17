@@ -57,6 +57,7 @@
         "redux-devtools-extension": "^2.13.2",
         "redux-promise": "^0.5.3",
         "request": "^2.88.0",
+        "sanitize-html": "^1.20.0",
         "selectly": "^0.5.0",
         "socket.io": "^2.0.3",
         "spiced-pg": "^1.0.0",
