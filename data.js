@@ -737,22 +737,22 @@ export const cities = [
 ]
 
 export const states = [
-    { value: 'baden-württemberg', label: 'Baden-Württemberg' },
-    { value: 'bayern', label: 'Bayern' },
-    { value: 'berlin', label: 'Berlin' },
-    { value: 'brandenburg', label: 'Brandenburg' },
-    { value: 'bremen', label: 'Bremen' },
-    { value: 'hamburg', label: 'Hamburg' },
-    { value: 'hessen', label: 'Hessen' },
-    { value: 'mecklenburg-vorpommern', label: 'Mecklenburg-Vorpommern' },
-    { value: 'niedersachsen', label: 'Niedersachsen' },
-    { value: 'nordrhein-westfalen', label: 'Nordrhein-Westfalen' },
-    { value: 'rheinland-pfalz', label: 'Rheinland-Pfalz' },
-    { value: 'saarland', label: 'Saarland' },
-    { value: 'sachsen', label: 'Sachsen' },
-    { value: 'sachsen-anhalt', label: 'Sachsen-Anhalt' },
-    { value: 'schleswig-holstein', label: 'Schleswig-Holstein' },
-    { value: 'thürigen', label: 'Thürigen' },
+    { value: 'baden-württemberg', label: 'Baden-Württemberg', state: 'Baden-Württemberg' },
+    { value: 'bayern', label: 'Bayern', state: 'Bayern' },
+    { value: 'berlin', label: 'Berlin', state: 'Berlin' },
+    { value: 'brandenburg', label: 'Brandenburg', state: 'Brandenburg' },
+    { value: 'bremen', label: 'Bremen', state: 'Baden-Württemberg' },
+    { value: 'hamburg', label: 'Hamburg', state: 'Hamburg' },
+    { value: 'hessen', label: 'Hessen', state: 'Hessen' },
+    { value: 'mecklenburg-vorpommern', label: 'Mecklenburg-Vorpommern', state: 'Mecklenburg-Vorpommern' },
+    { value: 'niedersachsen', label: 'Niedersachsen', state: 'Niedersachsen' },
+    { value: 'nordrhein-westfalen', label: 'Nordrhein-Westfalen', state: 'Nordrhein-Westfalen' },
+    { value: 'rheinland-pfalz', label: 'Rheinland-Pfalz', state: 'Rheinland-Pfalz' },
+    { value: 'saarland', label: 'Saarland', state: 'Saarland' },
+    { value: 'sachsen', label: 'Sachsen', state: 'Sachsen' },
+    { value: 'sachsen-anhalt', label: 'Sachsen-Anhalt', state: 'Sachsen-Anhalt' },
+    { value: 'schleswig-holstein', label: 'Schleswig-Holstein', state: 'Schleswig-Holstein' },
+    { value: 'thüringen', label: 'Thüringen', state: 'Thüringen' },
 ]
 
 export const placesIndex = [
@@ -944,3 +944,66 @@ export const studyDirection = [
   }
 
 ];
+
+export const art = [
+    { value: 'architektur', label: 'Architektur', topic: 'architecture'},
+{ value: 'kreativität', label: 'Kreativität', topic: 'creative'},
+{ value: 'drama', label: 'Drama', topic: 'drama'},
+{ value: 'zeichnen', label: 'Zeichnen', topic: 'draw'},
+{ value: 'improv', label: 'Improv', topic: 'improv'},
+{ value: 'theater', label: 'Theater', topic: 'live-theatre'},
+]
+
+export const career = [
+    { value: 'buchhaltung', label: 'Buchhaltung', topic: 'accounting'},
+{ value: 'marketing', label: 'Marketing', topic: 'advertising'},
+{ value: 'karriere', label: 'Karriere', topic: 'careers'},
+{ value: 'unternehmensberatung', label: 'Unternehmensberatung', topic: 'consultant'},
+{ value: 'vwl', label: 'VWL', topic: 'economics'},
+{ value: 'investment', label: 'Investment', topic: 'investing'},
+{ value: 'job suche', label: 'Job Suche', topic: 'job-search'},
+]
+
+export const cars = [
+    { value: 'autos', label: 'Autos', topic: 'cars'},
+]
+
+export const environment = [
+    { value: 'alternative energien', label: 'Alternative Energien', topic: 'alternativeenergy'},
+{ value: 'wohltätigkeit', label: 'Wohltätigkeit', topic: 'charity'},
+{ value: 'umwelt', label: 'Umwelt', topic: 'environment'},
+{ value: 'tanzen', label: 'Tanzen', topic: ''},
+{ value: 'ballet', label: 'Ballet', topic: 'ballet'},
+]
+
+export const education = [
+    { value: 'biologie', label: 'Biologie', topic: 'biology'},
+{ value: 'debattieren', label: 'Debattieren', topic: 'debates'},
+{ value: 'ingenieurwesen', label: 'Ingenieurwesen', topic: 'engineering'},
+{ value: 'geschichte', label: 'Geschichte', topic: 'history'},
+{ value: 'philosophie', label: 'Philosophie', topic: 'philosophy'},
+]
+export const terms = [
+    {
+        label: 'Kunst & Kultur',
+        options: art,
+    },
+    {
+        label: 'Karriere & Business',
+        options: career,
+    },
+    {
+        label: 'Auto & Motorrad',
+        options: cars,
+    },
+    {
+        label: 'Gemeinschaft & Umwelt',
+        options: environment,
+    },
+    {
+        label: 'Bildung & Lernen',
+        options: education,
+    }
+
+
+]

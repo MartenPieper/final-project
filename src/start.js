@@ -30,3 +30,6 @@ function HelloWorld() {
         <div>Hello, World!</div>
     );
 }
+
+process.env.NODE_ENV = 'development';
+process.env.BABEL_ENV = 'development';

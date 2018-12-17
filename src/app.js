@@ -5,7 +5,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Main from "./main"
 import Login from "./login"
 import Registration from "./registration"
-
+import DetailedExpansionPanel from "./resultspanel"
+import Typewriter from "./typewrite"
+// import Push from "./push"  In JSX <Push />
 
 export default class App extends React.Component {
     constructor() {
@@ -58,6 +60,9 @@ export default class App extends React.Component {
         <div> Hey</div>
             <Logo />
 
+            <Typewriter />
+
+
             <BrowserRouter>
                     <div>
                         <Route exact path="/"
@@ -85,6 +90,8 @@ export default class App extends React.Component {
                     />
 
                         <Route path="/registration" component = { Registration } />
+
+                        <DetailedExpansionPanel />
 </div>
             </BrowserRouter>
 

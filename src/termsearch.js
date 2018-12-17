@@ -1,13 +1,13 @@
 import React from 'react';
 
 import Select from 'react-select';
-import { colourOptions, groupedOptions, flavourOptions } from '../data';
+import { terms, art, career, cars, environment, education } from '../data';
 import { addSearchQuery} from "./actions"
 import { connect } from 'react-redux';
 
 
 const MyComponent = () => (
-  <Select options={options} />
+  <Select options={terms} />
 )
 
 
@@ -18,7 +18,7 @@ export default connect()((props) => (
 
     isMulti
     name="colors"
-    options={groupedOptions}
+    options={terms}
     className="basic-multi-select"
     classNamePrefix="select"
     onChange = {(e) =>
