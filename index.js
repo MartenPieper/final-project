@@ -15,6 +15,8 @@ const cheerio = require('cheerio')
 var multer = require("multer");
 var uidSafe = require("uid-safe");
 var path = require("path");
+var moment = require('moment');
+
 app.use(bodyParser.json());
 
 var diskStorage = multer.diskStorage({
@@ -143,7 +145,11 @@ if (req.body.selections.includes('Events/ Veranstaltungen')) {
               parsedResults.results[i].description = sanitizeHtml(parsedResults.results[i].description, {allowedTags: [],
 allowedAttributes: {}})
              // parsedResults.results[i].description = cheerio.load(parsedResults.results[i].description);
+             parsedResults.results[i].created = moment.unix(parsedResults.results[i].created / 1000).fromNow();
 
+              parsedResults.results[i].time = moment.unix(parsedResults.results[i].time / 1000).format("DD.MM.YYYY");
+             // .format("DD-MM-YYYY HH:mm")
+             // fromNow();
              }
 
              res.json(parsedResults)
@@ -248,6 +254,13 @@ app.post("/registration", (req, res) => {
 
 });
 
+app.get("/loginStatus", (req, res) => {
+    console.log("req.session in /loginStatus", req.session)
+
+    if (req.session.userId)
+    res.json({loginStatus: true})
+})
+
 app.post("/upload", uploader.single("file"), s3.upload, (req,res) => {
     // console.log("req.file in app.post", req.file)
     const configLink = "https://s3.amazonaws.com/studetscout/";
@@ -289,6 +302,7 @@ app.get("/logout", (req, res) => {
     // console.log("logout Route runnning")
     req.session = null;
     console.log("logged out worked")
+    res.redirect("/")
 });
 
 app.get('*', function(req, res) {

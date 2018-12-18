@@ -18,3 +18,12 @@ export async function addResults(results) {
         resultsInput: results
     }
 }
+
+export async function getLoginStatus(data) {
+
+    return {
+        type: 'LOGIN_STATUS',
+        login: data
+    }
+
+}

@@ -17,10 +17,18 @@ export default function reducer(state = {}, action) {
     }
 
     if (action.type == "ADD_RESULTS") {
-        console.log("action in reducer", action)
+        // console.log("action in reducer", action)
         return {
             ...state, results: action.resultsInput
         }
     }
+
+    if (action.type == 'LOGIN_STATUS') {
+        console.log("action in reducer", action)
+        return {
+            ...state, login: action.login.loginStatus
+        }
+    }
+
     return state;
 }

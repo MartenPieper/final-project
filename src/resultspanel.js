@@ -20,11 +20,15 @@ const styles = theme => ({
     width: '100%',
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(20),
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
+  },
+  tertiaryHeading: {
+      fontSize: theme.typography.pxToRem(13),
+      color: theme.palette.text.secondary,
   },
   icon: {
     verticalAlign: 'bottom',
@@ -67,17 +71,28 @@ function DetailedExpansionPanel(props) {
             <Typography className={classes.heading}>
             {result.name}
             </Typography>
+
+            {result.venue &&
             <Typography className={classes.secondaryHeading}>
             {result.venue.city}
             </Typography>
-          </div>
+            }
+            </div>
           <div className={classes.column}>
             <Typography className={classes.secondaryHeading}>
             {result.description.split(" ").splice(0,10).join(" ") + "..."}
             </Typography>
           </div>
+           <div className={classes.column}>
+           </div>
           <div className={classes.column}>
-            <Typography className={classes.secondaryHeading}></Typography>
+            <Typography className={classes.tertiaryHeading}>
+            Datum: {result.time}
+            </Typography>
+            <br/>
+            <Typography className={classes.tertiaryHeading}>
+            Gepostet: {result.created}
+            </Typography>
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.details}>

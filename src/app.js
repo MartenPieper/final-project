@@ -13,6 +13,8 @@ import Paper from '@material-ui/core/Paper';
 import PushComp from "./push"
 import Uploader from "./uploader";
 import Profile from "./profile";
+import { getLoginStatus } from "./actions"
+
 
 const style = {
     Paper: { padding: 20 }
@@ -103,6 +105,19 @@ const style = {
             this.close();
         }
     });
+    return axios.get("/loginStatus").then(results => {
+        console.log("data in axios.get /loginStatus", results)
+        this.props.dispatch(getLoginStatus(results.data))
+    })
+
+
+    }
+
+    componentDidUpdate() {
+        return axios.get("/loginStatus").then(results => {
+            console.log("data in axios.get /loginStatus", results)
+            this.props.dispatch(getLoginStatus(results.data))
+        })
     }
 
 
@@ -130,6 +145,7 @@ Heeeiiia
 
 <Paper style={style.Paper}>
 
+
     <Profile
         id={this.state.id}
         first={this.state.first}
@@ -140,6 +156,8 @@ Heeeiiia
         showUploader={this.showUploader}
         showLogin = {this.showLogin}
                             />
+
+
 <PushComp  />
 
 Hellooo
@@ -158,11 +176,14 @@ Hellooo
 
 <Grid item xs={12} sm={8} lg={6}>
 
+
 <Registration
 hideRegistration = {this.hideRegistration}
 showLogin = {this.showLogin}
 registrationIsVisible = {this.state.registrationIsVisible}
 />
+
+
 
 <Login
 hideLogin = {this.hideLogin}
@@ -197,9 +218,10 @@ loginIsVisible = {this.state.loginIsVisible}
 
 function mapStateToProps(state) {
     console.log("State in mapStateToProps in resultspanel", state)
-var list = state.results;
+
 return {
-    resultsArray: state.results
+    resultsArray: state.results,
+    login: state.login
 };
 
 }
