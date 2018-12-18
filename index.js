@@ -8,9 +8,10 @@ var bcrypt = require("./bcrypt");
 const cookieSession = require('cookie-session');
 const meetup = require("meetup-api");
 const request = require('request');
+var rp = require('request-promise');
 var sanitizeHtml = require('sanitize-html');
 const s3 = require("./s3");
-
+const cheerio = require('cheerio')
 var multer = require("multer");
 var uidSafe = require("uid-safe");
 var path = require("path");
@@ -130,26 +131,56 @@ if (req.body.selections.includes('Events/ Veranstaltungen')) {
         baseUrl += `&topic=${req.body.terms[0].topic}`
     }
 
+    rp(baseUrl).then(function (results) {
+            // console.log('results:', results); // Print the HTML for the Google homepage.
+             var parsedResults = JSON.parse(results);
+            //  for (var i = 0; i < parsedResults.results.length; i++) {
+            //    console.log("i in parsedResults loop", i)
+            // }
 
+             for (var i in parsedResults.results) {
+                //  cleanedResults += sanitizeHtml(parsedResults.results.description);
+              parsedResults.results[i].description = sanitizeHtml(parsedResults.results[i].description, {allowedTags: [],
+allowedAttributes: {}})
+             // parsedResults.results[i].description = cheerio.load(parsedResults.results[i].description);
+
+             }
+
+             res.json(parsedResults)
+
+
+            console.log("parsed Results after sanitization", parsedResults)
+        })
+        .catch(function (error) {
+               console.log('error:', error); // Print the error if one occurred
+        });
 
 console.log(baseUrl)
-    request(baseUrl, function (error, response, body) {
-      console.log('error:', error); // Print the error if one occurred
-      console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-      console.log('body:', body); // Print the HTML for the Google homepage.
-
-
-      var parsedResults = JSON.parse(body);
-      console.log("parsedResults", parsedResults)
-
-// var cleanedResults
-//       for (var desc in parsedResults) {
-//            cleanedResults += sanitizeHtml(parsedResults.results.description);
-//       }
-//       console.log("cleanedResults", cleanedResults)
-
-      res.json(parsedResults)
-    });
+//     request(baseUrl, function (error, response, body) {
+//       console.log('error:', error); // Print the error if one occurred
+//       // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+//       // console.log('body:', body); // Print the HTML for the Google homepage.
+//
+//       var parsedResults = JSON.parse(body);
+//        console.log("parsedResults", parsedResults)
+//
+//        var cleanedResults;
+//
+//        for (var i = 0; i < parsedResults.results.length; i++) {
+//     console.log("i in parsedResults loop", i)
+//
+// }
+//
+//       // for (var desc in parsedResults) {
+//       //     cleanedResults += sanitizeHtml(parsedResults.results.description);
+// //    parsedResults.results[i].description = sanitizeHtml(parsedResults.results[i].description)
+// // Later res.json sanitzied parsedResults
+//
+//       // }
+//       // console.log("cleanedResults", cleanedResults)
+//
+//       res.json(parsedResults)
+//     });
 
     // works for "city" in console: https://api.meetup.com/2/open_events?status=upcoming&sign=true&photo-host=public&country=de&city=berlin&page=20&&sign=true
 

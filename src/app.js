@@ -10,7 +10,7 @@ import Typewriter from "./typewrite"
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-// import Push from "./push"  In JSX <Push />
+import PushComp from "./push"
 import Uploader from "./uploader";
 import Profile from "./profile";
 
@@ -92,6 +92,19 @@ const style = {
         })
     }
 
+    componentDidMount() {
+        console.log("Push in app.js", Push);
+        Push.create("Hello world!", {
+        body: "How's it hangin'?",
+
+        timeout: 1000,
+        onClick: function () {
+            window.focus();
+            this.close();
+        }
+    });
+    }
+
 
 // #1 it renders the page
     render() {
@@ -127,6 +140,8 @@ Heeeiiia
         showUploader={this.showUploader}
         showLogin = {this.showLogin}
                             />
+<PushComp  />
+
 Hellooo
 
 <Uploader

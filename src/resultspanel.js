@@ -67,9 +67,14 @@ function DetailedExpansionPanel(props) {
             <Typography className={classes.heading}>
             {result.name}
             </Typography>
+            <Typography className={classes.secondaryHeading}>
+            {result.venue.city}
+            </Typography>
           </div>
           <div className={classes.column}>
-            <Typography className={classes.secondaryHeading}>{result.description.split(" ").splice(0,10).join(" ") + "..."}</Typography>
+            <Typography className={classes.secondaryHeading}>
+            {result.description.split(" ").splice(0,10).join(" ") + "..."}
+            </Typography>
           </div>
           <div className={classes.column}>
             <Typography className={classes.secondaryHeading}></Typography>
