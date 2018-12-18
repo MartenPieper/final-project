@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 // All JSX must be contained in one "HTML" tag
 export default function Logo() {
   return (
-      <div>
+      <div className="logo-container">
 
-        <img src="./logo.png" height="160" width="160" />
+        <img src="./logo.png" />
 
       </div>
   );

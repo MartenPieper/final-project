@@ -25,6 +25,16 @@ exports.createLogin = (first, last, email, password) => {
   );
 };
 
+
+exports.getUserPic = id => {
+    return db.query(
+        `SELECT *
+         FROM accounts
+         WHERE id = $1`,
+        [id]
+    );
+};
+
 exports.uploadBio = (id, bio) => {
     return db.query(
          `UPDATE accounts

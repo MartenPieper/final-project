@@ -155,7 +155,7 @@ allowedAttributes: {}})
              res.json(parsedResults)
 
 
-            console.log("parsed Results after sanitization", parsedResults)
+            // console.log("parsed Results after sanitization", parsedResults)
         })
         .catch(function (error) {
                console.log('error:', error); // Print the error if one occurred
@@ -254,6 +254,25 @@ app.post("/registration", (req, res) => {
 
 });
 
+app.get("/user", (req,res) => {
+    // console.log("GET / user hit")
+    // console.log("req.body in app.get /User", req.body)
+    db.getUserPic(req.session.userId).then(results => {
+        console.log("results in app.get /user", results)
+        res.json({
+            first: results.rows[0].first,
+            last: results.rows[0].last,
+            id: results.rows[0].id,
+            email: results.rows[0].email,
+            bio: results.rows[0].bio,
+            profilePicUrl:results.rows[0].profilepic
+            })
+    })
+    // db-query to get logged in user's first, last, profilePicUrl, etc.
+    // once you have the info, send it back to axios as response.
+
+})
+
 app.get("/loginStatus", (req, res) => {
     console.log("req.session in /loginStatus", req.session)
 
@@ -263,7 +282,7 @@ app.get("/loginStatus", (req, res) => {
 
 app.post("/upload", uploader.single("file"), s3.upload, (req,res) => {
     // console.log("req.file in app.post", req.file)
-    const configLink = "https://s3.amazonaws.com/studetscout/";
+    const configLink = "https://s3.amazonaws.com/pieper-catnip-socialnetwork/";
     let s3Url = configLink + req.file.filename
 
     // console.log("s3Url", s3Url)

@@ -58,3 +58,19 @@
 .front {
     color: black;
 }
+
+.header-container {
+    /* left: -50%;
+    transform: translateX(50%); */
+    display: flex;
+     justify-content: center;
+}
+
+.logo-container {
+    display: inline;
+
+}
+
+#header-one {
+    display: block;
+}

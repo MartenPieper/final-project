@@ -41,6 +41,9 @@ const styles = theme => ({
   column: {
     flexBasis: '33.33%',
   },
+  bigColumn: {
+      flexBasis: '66.66%',
+  },
   helper: {
     borderLeft: `2px solid ${theme.palette.divider}`,
     padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
@@ -96,20 +99,18 @@ function DetailedExpansionPanel(props) {
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.details}>
-          <div className={classes.column} />
-          <div className={classes.column}>
-          <div className={classes.column}>
-            <Typography className={classes.secondaryHeading}>{result.description.split(" ").splice(10,result.description.length).join(" ")}</Typography>
+
+          <div className={classes.bigColumn}>
+            <Typography className={classes.secondaryHeading}>{"..." + result.description.split(" ").splice(10,result.description.length).join(" ")}</Typography>
           </div>
 
 
 
-          </div>
           <div className={classNames(classes.column, classes.helper)}>
-            <Typography variant="caption">
+            <Typography className={classes.tertiaryHeading} variant="caption">
               Interessiert?
               <br />
-              <a href={result.event_url} className={classes.link}>
+              <a href={result.event_url} className={classes.link} target="_blank">
                 Zur Webseite
               </a>
             </Typography>

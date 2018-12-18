@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import PushComp from "./push"
+import EmailComp from "./email"
 import Uploader from "./uploader";
 import Profile from "./profile";
 import { getLoginStatus } from "./actions"
@@ -30,6 +31,7 @@ const style = {
             registrationIsVisible: false,
             setBio: "",
             uploaderIsVisible: false,
+            emailIsVisible: false,
         };
         this.showLogin = this.showLogin.bind(this);
         this.hideLogin = this.hideLogin.bind(this);
@@ -39,6 +41,8 @@ const style = {
         this.changePic = this.changePic.bind(this);
         this.hideUploader = this.hideUploader.bind(this);
         this.setBio = this.setBio.bind(this);
+        this.showEmail = this.showEmail.bind(this);
+        this.hideEmail = this.hideEmail.bind(this);
     }
 
     showLogin() {
@@ -56,9 +60,23 @@ const style = {
     }
 
     showRegistration() {
-        console.log("showRegistration clicked")
+        console.log("showLogin clicked")
         this.setState({
             registrationIsVisible: true
+        });
+    }
+
+    hideEmail(){
+        console.log("hideLogin clicked")
+        this.setState({
+            emailIsVisible: false
+        });
+    }
+
+    showEmail() {
+        console.log("showRegistration clicked")
+        this.setState({
+            emailIsVisible: true
         });
     }
 
@@ -105,10 +123,17 @@ const style = {
             this.close();
         }
     });
-    return axios.get("/loginStatus").then(results => {
+     axios.get("/loginStatus").then(results => {
         console.log("data in axios.get /loginStatus", results)
         this.props.dispatch(getLoginStatus(results.data))
     })
+
+    axios.get("/user").then(results=> {
+            console.log("data in app.js", results.data)
+            this.setState(results.data);
+            // this.changePic(results.data)
+        }).catch(err => {
+            console.log("Error in axios.get /user", err);})
 
 
     }
@@ -159,6 +184,12 @@ Heeeiiia
 
 
 <PushComp  />
+
+<EmailComp
+hideEmail = {this.hideEmail}
+emailIsVisible = {this.state.emailIsVisible}
+showEmail = {this.showEmail}
+/>
 
 Hellooo
 
