@@ -9,7 +9,9 @@ const MyComponent = () => (
   <Select options={studyDirection} />
 )
 
-
+//  In case I make hte query safe feature:
+// 1. Include id and main topic in option Object in data
+// 2. built data flow ending in defaultValue={lawAndEconomy[1]}
 export default connect()((props) => (
     <div>
     <div>StudySearch</div>
@@ -20,6 +22,7 @@ export default connect()((props) => (
     options={studyDirection}
     className="basic-multi-select"
     classNamePrefix="select"
+
     onChange = {(e) =>
         {
             const action = props.dispatch(addSearchQuery("study", e));

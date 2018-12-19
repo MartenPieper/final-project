@@ -5,29 +5,24 @@ export default class Typewriter extends Component {
 
   render() {
     return (
-        <div className="header-container">
-<div id="header-one">
-<h1>Mach mehr aus deinem Studium!</h1>
+        <div>
+
+        <section className="wrapper">
+
+
+          <h2 className="sentence">Hier findest du die passenden
+            <div className="slidingVertical">
+              <span>Events</span>
+              <span>Jobs</span>
+              <span>Onlinekurse</span>
+              <span>Stipendien</span>
+              <span>Freizeitangebote</span>
+            </div>
+
+          </h2>
+
+</section>
 </div>
-
-      <span>Bei StudentScout findest du alle ...</span>
-
-      <Typist>
-      <span>Studentenjobs..</span>
-      <Typist.Backspace count={14} delay={200} />
-      <span>tipendien..</span>
-      <Typist.Backspace count={12} delay={200} />
-      <span>Events..</span>
-      <Typist.Backspace count={8} delay={200} />
-      <span>Finanzierungen..</span>
-      <Typist.Backspace count={15} delay={200} />
-      <span>reizeitaktivitäten..</span>
-      <Typist.Backspace count={21} delay={200} />
-      <span>Deals für mehr Studentenleben..</span>
-
-
-      </Typist>
-      </div>
 
     );
   }
