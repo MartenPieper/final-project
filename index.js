@@ -16,6 +16,15 @@ var multer = require("multer");
 var uidSafe = require("uid-safe");
 var path = require("path");
 var moment = require('moment');
+const spicedPg = require("spiced-pg");
+
+const database = spicedPg(
+  process.env.DATABASE_URL ||
+    "postgres:postgres:postgres@localhost:5432/studentsite"
+);
+
+
+
 
 app.use(bodyParser.json());
 
@@ -99,24 +108,38 @@ app.post("/getSearchUpdate", (req, res) => {
     // `
 
 
-// create one of these per table option 
-// create
-    let q = "SELECT * FROM events "
+// create one of these per table option (e.g. events.sql, jobs.sql, scholarships.sql, financing.sql, freetime.sql, others.sql) -> 6 tables
+// create one per table row option (e.g. name, organizer, description, place, other, link) -> 6
+    let q = "SELECT * FROM events"
+    let qWhere = ""
+    let qIlike = ""
     let counter = 1
     let params = []
 
 
     if (req.body.study.length > 0) {
         for (let i = 0; i < req.body.study.length; i++) {
-            q += `OR name ILIKE ${ counter }`
-            params.push(req.body.study[i])
+            params.push("%" + req.body.study[i].value + "%")
+            if (i === 0) {
+            qWhere = ` WHERE name ILIKE $${params.length}`
+        } else {
+            qIlike += ` OR name ILIKE $${params.length}`
+            }
             counter++
         }
     }
 
-    db.query(q, params).then(resp => {
+    var fullQuery = q + qWhere + qIlike
 
-    })
+    console.log("fullQuery in event db.query", fullQuery);
+    console.log("q in event db.query", q);
+    console.log("params in event db.query", params);
+
+
+    return database.query(fullQuery, params).then(resp => {
+        console.log("resp in db.query for study", resp)
+    }).catch(err => {
+    console.log("error in study db.query", err)})
 
 
 
@@ -312,7 +335,7 @@ app.get("/user", (req,res) => {
     // console.log("GET / user hit")
     // console.log("req.body in app.get /User", req.body)
     db.getUserPic(req.session.userId).then(results => {
-        console.log("results in app.get /user", results)
+        // console.log("results in app.get /user", results)
         res.json({
             first: results.rows[0].first,
             last: results.rows[0].last,
@@ -328,7 +351,7 @@ app.get("/user", (req,res) => {
 })
 
 app.get("/loginStatus", (req, res) => {
-    console.log("req.session in /loginStatus", req.session)
+    // console.log("req.session in /loginStatus", req.session)
 
     if (req.session.userId)
     res.json({loginStatus: true})

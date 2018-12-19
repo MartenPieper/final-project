@@ -8,7 +8,7 @@ export default class Typewriter extends Component {
         <div>
 
         <section className="wrapper">
-
+        <h1>Willst du mehr aus deinem Studium machen?</h1>
 
           <h2 className="sentence">Hier findest du die passenden
             <div className="slidingVertical">

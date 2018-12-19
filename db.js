@@ -54,3 +54,5 @@ exports.uploadProfilePic = (id, profilepic) => {
          [id, profilepic]
     );
 };
+
+// exports.eventsSearch = (params)
