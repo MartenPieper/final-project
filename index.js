@@ -87,6 +87,60 @@ if (process.env.NODE_ENV != 'production') {
 app.post("/getSearchUpdate", (req, res) => {
     // console.log("req.body.places[0]", req.body.places[0].value)
      console.log("req.body", req.body)
+
+
+
+
+// Perfect query: const q = `
+    // SELECT *
+    // FROM events
+    // WHERE name ILIKE $1
+    // OR type ILIKE $1 OR organizer ILIKE $1 OR description ILIKE $1 OR place ILIKE $1 OR other ILIKE $1
+    // `
+
+
+// create one of these per table option 
+// create
+    let q = "SELECT * FROM events "
+    let counter = 1
+    let params = []
+
+
+    if (req.body.study.length > 0) {
+        for (let i = 0; i < req.body.study.length; i++) {
+            q += `OR name ILIKE ${ counter }`
+            params.push(req.body.study[i])
+            counter++
+        }
+    }
+
+    db.query(q, params).then(resp => {
+
+    })
+
+
+
+    // let q = `SELECT name, type
+    // FROM events
+    // WHERE name ILIKE $1 OR type ILIKE $1`
+
+    // const params = [name + '%' || null, type + '%' || null ];`
+
+    //
+    //  args.forEach(function(arg, i) {
+    //      q += `OR field ilike $${i+1}`
+    //      params.push(field[i])
+    //  })
+    //  db.query(q, params)
+    //
+    //  study: [ { value: 'management', label: 'Management' } ],
+    //  places:
+    //  [ { value: 'berlin', label: 'Berlin', state: 'Berlin' },
+    // { value: 'hamburg', label: 'Hamburg', state: 'Hamburg' } ],
+    // terms: [ { value: 'drama', label: 'Drama', topic: 'drama' } ]
+
+
+
     // db.getSearchResults(req.body).then(results => {
     //
     //     console.log("results", results)
@@ -115,7 +169,7 @@ if (req.body.selections.includes('Events/ Veranstaltungen')) {
     if (req.body.terms) {
 
         // might have to do a for in loop to access all req.body.terms baseUrl += "&terms=" req.body.terms[elem]
-        console.log("req.body.terms", req.body.terms)
+        console.log("req.body", req.body)
         baseUrl += `&topic=${req.body.terms[0].topic}`
     }
 
