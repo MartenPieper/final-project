@@ -1,10 +1,3 @@
--- Firmen Name
--- Link
--- Job Name
--- Ort
--- Volle Beschreibung
--- Sonstiges
-
 DROP TABLE IF EXISTS jobs;
 
 

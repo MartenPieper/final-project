@@ -219,3 +219,33 @@ body{
 	80% { opacity: 0; }
 	100% { opacity: 0; }
 }
+
+.loading:before {
+    content: '';
+
+    /* POSITION SPINNER IN MID OF PAGE */
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    /* SPINNER W/H */
+    height: 60px;
+    width: 60px;
+
+    /* PUT SPINNER IN MID OF PAGE */
+    /* -30 TO ACCOMODATE HALF OF SPINNER HEIGHT */
+    margin: -30px 0 0 -30px;
+
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #0F6BA5;
+    border-bottom-color: #0F6BA5;
+    animation: spinner 1s ease infinite;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}

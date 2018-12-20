@@ -58,7 +58,7 @@ function mouseOut(e) {
 
     return (
      <Grid container justify="center" alignItems="center">
-      <Avatar className={classes.bigAvatar} onMouseOver={mouseOver} onMouseOut ={mouseOut} alt="Remy Sharp" onClick = { props.showUploader } src={ props.profilePicUrl || "/default.png" }  />
+      <Avatar className={classes.bigAvatar} onMouseOver={mouseOver} onMouseOut ={mouseOut} alt="Remy Sharp" onClick = { props.showUploader } src={ props.profilePicUrl || "/default1.png" }  />
 
       </Grid>
     );

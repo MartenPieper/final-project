@@ -59,78 +59,83 @@ const styles = theme => ({
 
 function DetailedExpansionPanel(props) {
   const { classes } = props;
+  console.log("props in resultsspan", props)
   return (
       <div className={classes.root}>
 
 
+
       {props.resultsArray && props.resultsArray.map(
-                  result => {
+                  res => { // console.log("res in map", res)
+                  return res.map(result => {
+// console.log("result:", result)
+
                       return (
-        <div className="online-user" key={result.id}>
+                          <div className="online-user" key={result.id}>
 
-      <ExpansionPanel >
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <div className={classes.column}>
-            <Typography className={classes.heading}>
-            {result.name}
-            </Typography>
-
-            {result.venue &&
-            <Typography className={classes.secondaryHeading}>
-            {result.venue.city}
-            </Typography>
-            }
-            </div>
-          <div className={classes.column}>
-            <Typography className={classes.secondaryHeading}>
-            {result.description.split(" ").splice(0,10).join(" ") + "..."}
-            </Typography>
-          </div>
+       <ExpansionPanel >
+         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
            <div className={classes.column}>
+             <Typography className={classes.heading}>
+             {result.name}
+             </Typography>
+
+             {result.venue &&
+             <Typography className={classes.secondaryHeading}>
+             {result.venue.city}
+             </Typography>
+             }
+             </div>
+           <div className={classes.column}>
+             <Typography className={classes.secondaryHeading}>
+             {result.description.split(" ").splice(0,10).join(" ") + "..."}
+             </Typography>
            </div>
-          <div className={classes.column}>
-            <Typography className={classes.tertiaryHeading}>
-            Datum: {result.time}
-            </Typography>
-            <br/>
-            <Typography className={classes.tertiaryHeading}>
-            Gepostet: {result.created}
-            </Typography>
-          </div>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.details}>
+            <div className={classes.column}>
+            </div>
+           <div className={classes.column}>
+             <Typography className={classes.tertiaryHeading}>
+             Datum: {result.time}
+             </Typography>
+             <br/>
+             <Typography className={classes.tertiaryHeading}>
+             Gepostet: {result.created}
+             </Typography>
+           </div>
+         </ExpansionPanelSummary>
+         <ExpansionPanelDetails className={classes.details}>
 
-          <div className={classes.bigColumn}>
-            <Typography className={classes.secondaryHeading}>{"..." + result.description.split(" ").splice(10,result.description.length).join(" ")}</Typography>
-          </div>
-
-
-
-          <div className={classNames(classes.column, classes.helper)}>
-            <Typography className={classes.tertiaryHeading} variant="caption">
-              Interessiert?
-              <br />
-              <a href={result.event_url} className={classes.link} target="_blank">
-                Zur Webseite
-              </a>
-            </Typography>
-          </div>
-        </ExpansionPanelDetails>
-        <Divider />
-        <ExpansionPanelActions>
-          <Button size="small">Cancel</Button>
-          <Button size="small" color="primary">
-            Save
-          </Button>
-        </ExpansionPanelActions>
-      </ExpansionPanel>
+           <div className={classes.bigColumn}>
+             <Typography className={classes.secondaryHeading}>{"..." + result.description.split(" ").splice(10,result.description.length).join(" ")}</Typography>
+           </div>
 
 
-      </div>
+
+           <div className={classNames(classes.column, classes.helper)}>
+             <Typography className={classes.tertiaryHeading} variant="caption">
+               Interessiert?
+               <br />
+               <a href={result.place} className={classes.link} target="_blank">
+                 Zur Webseite
+               </a>
+             </Typography>
+           </div>
+         </ExpansionPanelDetails>
+         <Divider />
+         <ExpansionPanelActions>
+           <Button size="small">Cancel</Button>
+           <Button size="small" color="primary">
+             Save
+           </Button>
+         </ExpansionPanelActions>
+       </ExpansionPanel>
+
+
+       </div>
      )
-     }
-     )}
-
+ })
+ })
+}
     </div>
 )
 }

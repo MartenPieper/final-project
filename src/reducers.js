@@ -12,14 +12,14 @@ export default function reducer(state = {}, action) {
         console.log("action in reducer", action)
         const queryInput = state[action.queryInput]
         return {
-            ...state, [action.queryInput]: action.searchInput
+            ...state, [action.queryInput]: action.searchInput, isLoading: true
         }
     }
 
     if (action.type == "ADD_RESULTS") {
         // console.log("action in reducer", action)
         return {
-            ...state, results: action.resultsInput
+            ...state, results: action.resultsInput, isLoading: false
         }
     }
 

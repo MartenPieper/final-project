@@ -7,7 +7,8 @@ export async function addSearchQuery(query, input) {
     return {
         type: 'ADD_SEARCH_QUERY',
         queryInput: query,
-        searchInput: input
+        searchInput: input,
+        isLoading: true
     };
 }
 
@@ -15,7 +16,8 @@ export async function addResults(results) {
     console.log("results in actions.js", results)
     return {
         type: 'ADD_RESULTS',
-        resultsInput: results
+        resultsInput: results,
+        isLoading: false
     }
 }
 

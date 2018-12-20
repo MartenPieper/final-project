@@ -15,15 +15,23 @@ class SearchInput extends React.Component {
         super(props)
         this.state = {}
         this.handleSearch = this.handleSearch.bind(this);
+            this.resetResults = this.resetResults.bind(this);
     }
 
     handleSearch() {
         console.log("query", this.props.query)
         var queryInput = this.props.query
         axios.post("/getSearchUpdate", queryInput).then(resp => {
-            console.log("resp.data.results", resp.data.results)
+            console.log("resp in axios /getSearchUpdate", resp)
 
-            this.props.dispatch(addResults(resp.data.results));
+            this.props.dispatch(addResults(resp.data));
+        })
+    }
+
+    resetResults() {
+        axios.get("/reset").then(resp => {
+            console.log("results reset executed",resp)
+            this.props.dispatch(addResults(resp.data));
         })
     }
 
@@ -31,6 +39,7 @@ class SearchInput extends React.Component {
         return (
 
             <div className="searchinput-container">
+            {this.props.isLoading && <div className="loading"></div>}
                 <div>Searchinput works</div>
                 <MultipleSelect handleSearch={this.handleSearch}/>
                 <StudySearch handleSearch={this.handleSearch}/>
@@ -38,7 +47,7 @@ class SearchInput extends React.Component {
                 <PlaceSearch handleSearch={this.handleSearch}/>
                 <TermSearch handleSearch={this.handleSearch}/>
                 <DetailedSearch />
-
+                <button onClick ={this.resetResults}>Zurücksetzen</button>
           </div>
         )
     }
@@ -50,7 +59,8 @@ function mapStateToProps(state) {
 
 
 return {
-    query: state
+    query: state,
+    isLoading: state.isLoading
 };
 }
 
