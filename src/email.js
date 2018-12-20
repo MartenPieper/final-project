@@ -74,7 +74,7 @@ class EmailComponent extends React.Component {
             <div  className="email-container">
 
             <div>
-        <button id="email-notification" onClick={this.props.showEmail}>Email Notification</button>
+        
         </div>
             <Modal
           aria-labelledby="simple-modal-title"
@@ -85,7 +85,7 @@ class EmailComponent extends React.Component {
             <div className="closingbutton" onClick={this.props.hideEmail}>X</div>
             <br />
 
-                <h1>Updates per Email erhalten?</h1>
+                <h1>Email bei neuen Suchergebnissen?</h1>
                             <form className="form" onSubmit={this.handleSubmit}>
 
                             <div className="form__group">

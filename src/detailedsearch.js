@@ -17,7 +17,7 @@ export default class DetailedSearch extends React.Component {
         return (
 
              <div className="searchinput-container">
-            <div>DetailedSearch works</div>
+            
 
 
           </div>

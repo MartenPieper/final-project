@@ -95,7 +95,7 @@ if (process.env.NODE_ENV != 'production') {
 // to add to this object globalResults[ yourKey ] = yourValue;
 var globalResults = [];
 const promises = [];
-
+var testResults = [];
 
 app.post("/getSearchUpdate", (req, res) => {
     // console.log("req.body.places[0]", req.body.places[0].value)
@@ -161,9 +161,6 @@ var dbQueryNoInput = (table) => {
 
 
 }
-
-
-
 
 
 var dbQueryStudyInput = (table, row) => {
@@ -307,7 +304,7 @@ if (req.body.selections.includes('Events/ Veranstaltungen')) {
     if (req.body.terms) {
 
         // might have to do a for in loop to access all req.body.terms baseUrl += "&terms=" req.body.terms[elem]
-        console.log("req.body", req.body)
+    //     console.log("req.body", req.body)
         baseUrl += `&topic=${req.body.terms[0].topic}`
 
         apiCall(baseUrl)
@@ -329,7 +326,7 @@ if (req.body.selections.includes('Events/ Veranstaltungen')) {
     //     baseUrl += `&topic=${req.body.terms[0].topic}`
     // }
 
-    console.log("baseUrl", baseUrl)
+    // console.log("baseUrl", baseUrl)
 
     function apiCall(baseUrl) {
     rp(baseUrl).then(function (results) {
@@ -342,7 +339,7 @@ if (req.body.selections.includes('Events/ Veranstaltungen')) {
              for (var i in parsedResults.results) {
                 //  cleanedResults += sanitizeHtml(parsedResults.results.description);
               parsedResults.results[i].description = sanitizeHtml(parsedResults.results[i].description, {allowedTags: [],
-allowedAttributes: {}})
+                  allowedAttributes: {}})
              // parsedResults.results[i].description = cheerio.load(parsedResults.results[i].description);
              parsedResults.results[i].created = moment.unix(parsedResults.results[i].created / 1000).fromNow();
 
@@ -351,19 +348,58 @@ allowedAttributes: {}})
              // fromNow();
              }
 
-            // res.json(parsedResults)
 
-// globalResults = [...globalResults, ...myAPIResults.map(result => {
-// return {
+             for (let data in parsedResults) {
+                 globalResults.push({
+        place: data['venue.city'],
+        link: data['event_url'],
+        event_data: data['time'],
+        creation_date: data['created']
+    })
+    
 
-    // Assign key Value pairs
+    console.log("globalResults in API call", globalResults)
+}
+        //      arr = []
+        //      arr.push(parsedResults)
+        //     // res.json(parsedResults)
+        //
+        //  testResults = [...globalResults, ...arr.map(result => {
+        //       return {
+        //            result['place'] = result['venue.city'];
+        //            result['link'] = result['event_url'];
+        //            result['event_date'] = result['time'];
+        //            result['creation_date'] = result['created'];
+        // // Assign key Value pairs
+        //    }
+        // })]
+
+// testResults = parsedResults.forEach( function(data) {
+//   data['place'] = data['venue.city'];
+//   delete data['venue.city'];
+//   data['link'] = data['event_url'];
+//   delete data['event_url'];
+//   data['event_date'] = data['time'];
+//   delete data['time'];
+//   data['creation_date'] = data['created'];
+//    delete data['created'];
+// });
+
+// for (let data in parsedResults) {
+//   data['place'] = data['venue.city'];
+//   data['link'] = data['event_url'];
+//   data['event_date'] = data['time'];
+//   data['creation_date'] = data['created'];
 // }
-})
-            // console.log("parsed Results after sanitization", parsedResults)
 
-        .catch(function (error) {
+testResults.push(parsedResults);
+            console.log("parsedResults in API call: ", parsedResults);
+            console.log("testResults in API call: ", testResults);
+
+
+}).catch(function (error) {
                console.log('error:', error); // Print the error if one occurred
-        });
+        })
 
 }
 
@@ -579,6 +615,8 @@ console.log("Query includes Stipendien", req.body.selections.includes('Stipendie
 
 
     }
+
+
     Promise.all(promises).then(values => {
         console.log("globalResults in Promise.all", globalResults)
         res.json(globalResults.filter(item => item.length))

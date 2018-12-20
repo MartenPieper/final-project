@@ -162,7 +162,7 @@ direction="row"
 <Logo />
 
 <Typewriter />
-Heeeiiia
+
 </Paper>
 </Grid>
 
@@ -180,6 +180,7 @@ Heeeiiia
         setBio={this.setBio}
         showUploader={this.showUploader}
         showLogin = {this.showLogin}
+        showEmail = {this.showEmail}
                             />
 
 
@@ -188,10 +189,10 @@ Heeeiiia
 <EmailComp
 hideEmail = {this.hideEmail}
 emailIsVisible = {this.state.emailIsVisible}
-showEmail = {this.showEmail}
+
 />
 
-Hellooo
+
 
 <Uploader
                     userID = {this.state.userId}

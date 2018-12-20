@@ -15,20 +15,22 @@ function Profile(props) {
         }
 
         { props.login &&
-            <h2>Your User Information</h2>
+            <h2 className="profile-text">Deine Account Informationen</h2>
         }
         { props.login &&
-            <h3>First Name: {props.first}</h3>
+            <h3 className="profile-text">Vorname: {props.first}</h3>
         }
         { props.login &&
-            <h3>Last Name: {props.last}</h3>
+            <h3 className="profile-text">Nachname: {props.last}</h3>
  }
-        { props.login &&
-            <Logout />
-        }
         { props.login &&
             <Bio id="bio" bio={props.bio} setBio={props.setBio} />
         }
+        { props.login &&
+            <Logout />
+        }
+
+        <button className="notification-button" onClick={props.showEmail}>Email Updates</button>
 
         </div>
     );

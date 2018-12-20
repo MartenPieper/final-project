@@ -11,7 +11,7 @@ const MyComponent = () => (
 
 export default connect()((props) => (
     <div>
-    <div>UniSearch</div>
+     <div className="input-title">Hochschule:</div>
   <Select
 
     isMulti

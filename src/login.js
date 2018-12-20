@@ -81,7 +81,7 @@ class Login extends React.Component {
             <div className="closingbutton" onClick={this.props.hideLogin}>X</div>
             <br />
 
-                <h1>Please login</h1>
+                <h1>Hier Anmelden:</h1>
                 <form className="form" onSubmit={this.handleSubmit}>
 
                             <div className="form__group">
