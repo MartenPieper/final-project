@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS other;
 CREATE TABLE other(
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
-    type VARCHAR(100) DEFAULT "Andere",
+    type VARCHAR(100),
     organizer VARCHAR(300),
     description TEXT NOT NULL,
     place VARCHAR(300),

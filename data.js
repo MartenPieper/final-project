@@ -968,6 +968,23 @@ export const cars = [
     { value: 'autos', label: 'Autos', topic: 'cars'},
 ]
 
+export const tech = [
+    { value: 'python', label: 'Python', topic: 'python'},
+    { value: 'javascript', label: 'JavaScript', topic: 'javascript'},
+    { value: 'javascript-frameworks', label: 'JavaScript Framework', topic: 'javascript-frameworks'},
+    { value: 'php', label: 'PHP', topic: 'php'},
+    { value: 'nosql', label: 'NoSQL', topic: 'nosql'},
+    { value: 'ruby-on-rails', label: 'Ruby on Rails', topic: 'ruby-on-rails'},
+
+    { value: 'nodejs', label: 'NodeJS', topic: 'nodejs'},
+    { value: 'angularjs', label: 'AngularJS', topic: 'angularjs'},
+    { value: 'bitcoin', label: 'Bitcoin', topic: 'bitcoin'},
+
+    { value: 'cryptocurrency', label: 'cryptocurrency', topic: 'cryptocurrency'},
+    { value: 'google', label: 'Google', topic: 'google'},
+    { value: 'jquery', label: 'jQuery', topic: 'jquery'},
+]
+
 export const environment = [
     { value: 'alternative energien', label: 'Alternative Energien', topic: 'alternativeenergy'},
 { value: 'wohltätigkeit', label: 'Wohltätigkeit', topic: 'charity'},
@@ -984,6 +1001,10 @@ export const education = [
 { value: 'philosophie', label: 'Philosophie', topic: 'philosophy'},
 ]
 export const terms = [
+    {
+        label: 'Tech & Programmieren',
+        options: tech
+    },
     {
         label: 'Kunst & Kultur',
         options: art,

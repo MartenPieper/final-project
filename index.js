@@ -147,6 +147,7 @@ app.post("/getSearchUpdate", (req, res) => {
     // });
 
 console.log(req.body.selections.includes('Events/ Veranstaltungen'))
+
 if (req.body.selections.includes('Events/ Veranstaltungen')) {
     var baseUrl = `https://api.meetup.com/2/open_events?key=2c6569527c17491e136741596d14249&status=upcoming&sign=true&photo-host=public&country=de&page=20`
     if (req.body.terms) {
@@ -219,40 +220,46 @@ allowedAttributes: {}})
             // create one per table row option (e.g. name, organizer, description, place, other, link) -> 6
 
 
+function dbCallStudyInput(input) {
+    let q = `SELECT DISTINCT * FROM ${input}`
+    let qWhere = ""
+    let qIlike = ""
+    let counter = 1
+    let params = []
+
+        for (let i = 0; i < req.body.study.length; i++) {
+            params.push("%" + req.body.study[i].value + "%")
+            if (i === 0) {
+            qWhere = ` WHERE name ILIKE $${params.length}`
+        } else {
+            qIlike += ` OR name ILIKE $${params.length}`
+            }
+            counter++
+        }
+
+        var fullQuery = q + qWhere + qIlike
+
+        console.log("fullQuery in event db.query", fullQuery);
+        console.log("q in event db.query", q);
+        console.log("params in event db.query", params);
+
+        database.query(fullQuery, params).then(resp => {
+            console.log("resp in db.query for study", resp.rows[0])
+            globalResults.push(resp.rows[0]);
+            console.log("globalResults in database.query", globalResults)
+            // results are in resp.rows[0]
+        }).catch(err => {
+        console.log("error in study db.query", err)})
+}
+
     if (req.body.study) {
-            let q = "SELECT DISTINCT * FROM events"
-            let qWhere = ""
-            let qIlike = ""
-            let counter = 1
-            let params = []
-
-                for (let i = 0; i < req.body.study.length; i++) {
-                    params.push("%" + req.body.study[i].value + "%")
-                    if (i === 0) {
-                    qWhere = ` WHERE name ILIKE $${params.length}`
-                } else {
-                    qIlike += ` OR name ILIKE $${params.length}`
-                    }
-                    counter++
-                }
-
-                var fullQuery = q + qWhere + qIlike
-
-                console.log("fullQuery in event db.query", fullQuery);
-                console.log("q in event db.query", q);
-                console.log("params in event db.query", params);
-
-                database.query(fullQuery, params).then(resp => {
-                    console.log("resp in db.query for study", resp.rows[0])
-                    globalResults.push(resp.rows[0]);
-                    console.log("globalResults in database.query", globalResults)
-                    // results are in resp.rows[0]
-                }).catch(err => {
-                console.log("error in study db.query", err)})
+            dbCallStudyInput("events")
 
             }
 
     if (req.body.unis) {
+
+
             let q = "SELECT DISTINCT * FROM events"
             let qWhere = ""
             let qIlike = ""
