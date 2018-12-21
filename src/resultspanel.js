@@ -80,9 +80,9 @@ function DetailedExpansionPanel(props) {
              {result.name}
              </Typography>
 
-             {result.venue &&
+             {result.place &&
              <Typography className={classes.secondaryHeading}>
-             {result.venue.city}
+             {result.place}
              </Typography>
              }
              </div>
@@ -94,13 +94,20 @@ function DetailedExpansionPanel(props) {
             <div className={classes.column}>
             </div>
            <div className={classes.column}>
+
+
+           {result.event_date &&
              <Typography className={classes.tertiaryHeading}>
-             Datum: {result.time}
+             Datum: {result.event_date}
              </Typography>
+            }
              <br/>
+              {result.ts_events &&
              <Typography className={classes.tertiaryHeading}>
-             Gepostet: {result.created}
+             Gepostet: {result.ts_events}
              </Typography>
+            }
+
            </div>
          </ExpansionPanelSummary>
          <ExpansionPanelDetails className={classes.details}>

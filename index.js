@@ -356,7 +356,7 @@ if (req.body.selections.includes('Events/ Veranstaltungen')) {
         event_data: data['time'],
         creation_date: data['created']
     })
-    
+
 
     console.log("globalResults in API call", globalResults)
 }
@@ -617,10 +617,204 @@ console.log("Query includes Stipendien", req.body.selections.includes('Stipendie
     }
 
 
-    Promise.all(promises).then(values => {
-        console.log("globalResults in Promise.all", globalResults)
-        res.json(globalResults.filter(item => item.length))
-    })
+console.log("Query includes Kurse", req.body.selections.includes('Kurse/ MOOCs'))
+
+if (req.body.selections.includes('Kurse/ MOOCs')) {
+
+    console.log("Kurse If Block running")
+
+
+        if(!req.body.study && !req.body.unis && !req.body.places && !req.body.terms ) {
+
+    console.log("Kurse with no Input running")
+
+    promises.push(dbQueryNoInput("courses", "name"));
+    promises.push(dbQueryNoInput("courses", "organizer"));
+    promises.push(dbQueryNoInput("courses", "description"));
+    promises.push(dbQueryNoInput("courses", "place"));
+    promises.push(dbQueryNoInput("courses", "other"));
+    promises.push(dbQueryNoInput("courses", "link"));
+}
+    if (req.body.study) {
+
+promises.push(dbQueryStudyInput("courses", "name"));
+promises.push(dbQueryStudyInput("courses", "organizer"));
+promises.push(dbQueryStudyInput("courses", "description"));
+promises.push(dbQueryStudyInput("courses", "place"));
+promises.push(dbQueryStudyInput("courses", "other"));
+promises.push(dbQueryStudyInput("courses", "link"));
+
+            }
+
+    if (req.body.unis) {
+
+promises.push(dbQueryUniInput("courses", "name"));
+promises.push(dbQueryUniInput("courses", "organizer"));
+promises.push(dbQueryUniInput("courses", "description"));
+promises.push(dbQueryUniInput("courses", "place"));
+promises.push(dbQueryUniInput("courses", "other"));
+promises.push(dbQueryUniInput("courses", "link"));
+
+    }
+
+    if (req.body.places) {
+
+promises.push(dbQueryPlaceInput("courses", "name"));
+promises.push(dbQueryPlaceInput("courses", "organizer"));
+promises.push(dbQueryPlaceInput("courses", "description"));
+promises.push(dbQueryPlaceInput("courses", "place"));
+promises.push(dbQueryPlaceInput("courses", "other"));
+promises.push(dbQueryPlaceInput("courses", "link"));
+        }
+
+    if (req.body.terms) {
+
+promises.push(dbQueryTermsInput("courses", "name"));
+promises.push(dbQueryTermsInput("courses", "organizer"));
+promises.push(dbQueryTermsInput("courses", "description"));
+promises.push(dbQueryTermsInput("courses", "place"));
+promises.push(dbQueryTermsInput("courses", "other"));
+promises.push(dbQueryTermsInput("courses", "link"));
+            }
+
+
+
+}
+
+
+console.log("Query includes Kurse", req.body.selections.includes('Deals'))
+
+if (req.body.selections.includes('Deals')) {
+
+    console.log("Deals If Block running")
+
+
+        if(!req.body.study && !req.body.unis && !req.body.places && !req.body.terms ) {
+
+    console.log("Deals with no Input running")
+
+    promises.push(dbQueryNoInput("deals", "name"));
+    promises.push(dbQueryNoInput("deals", "organizer"));
+    promises.push(dbQueryNoInput("deals", "description"));
+    promises.push(dbQueryNoInput("deals", "place"));
+    promises.push(dbQueryNoInput("deals", "other"));
+    promises.push(dbQueryNoInput("deals", "link"));
+}
+    if (req.body.study) {
+
+promises.push(dbQueryStudyInput("deals", "name"));
+promises.push(dbQueryStudyInput("deals", "organizer"));
+promises.push(dbQueryStudyInput("deals", "description"));
+promises.push(dbQueryStudyInput("deals", "place"));
+promises.push(dbQueryStudyInput("deals", "other"));
+promises.push(dbQueryStudyInput("deals", "link"));
+
+            }
+
+    if (req.body.unis) {
+
+promises.push(dbQueryUniInput("deals", "name"));
+promises.push(dbQueryUniInput("deals", "organizer"));
+promises.push(dbQueryUniInput("deals", "description"));
+promises.push(dbQueryUniInput("deals", "place"));
+promises.push(dbQueryUniInput("deals", "other"));
+promises.push(dbQueryUniInput("deals", "link"));
+
+    }
+
+    if (req.body.places) {
+
+promises.push(dbQueryPlaceInput("deals", "name"));
+promises.push(dbQueryPlaceInput("deals", "organizer"));
+promises.push(dbQueryPlaceInput("deals", "description"));
+promises.push(dbQueryPlaceInput("deals", "place"));
+promises.push(dbQueryPlaceInput("deals", "other"));
+promises.push(dbQueryPlaceInput("deals", "link"));
+        }
+
+    if (req.body.terms) {
+
+promises.push(dbQueryTermsInput("deals", "name"));
+promises.push(dbQueryTermsInput("deals", "organizer"));
+promises.push(dbQueryTermsInput("deals", "description"));
+promises.push(dbQueryTermsInput("deals", "place"));
+promises.push(dbQueryTermsInput("deals", "other"));
+promises.push(dbQueryTermsInput("deals", "link"));
+            }
+
+
+
+}
+
+console.log("Query includes Kurse", req.body.selections.includes('Andere'))
+
+if (req.body.selections.includes('Andere')) {
+
+    console.log("Deals If Block running")
+
+
+        if(!req.body.study && !req.body.unis && !req.body.places && !req.body.terms ) {
+
+    console.log("Deals with no Input running")
+
+    promises.push(dbQueryNoInput("other", "name"));
+    promises.push(dbQueryNoInput("other", "organizer"));
+    promises.push(dbQueryNoInput("other", "description"));
+    promises.push(dbQueryNoInput("other", "place"));
+    promises.push(dbQueryNoInput("other", "other"));
+    promises.push(dbQueryNoInput("other", "link"));
+}
+    if (req.body.study) {
+
+promises.push(dbQueryStudyInput("other", "name"));
+promises.push(dbQueryStudyInput("other", "organizer"));
+promises.push(dbQueryStudyInput("other", "description"));
+promises.push(dbQueryStudyInput("other", "place"));
+promises.push(dbQueryStudyInput("other", "other"));
+promises.push(dbQueryStudyInput("other", "link"));
+
+            }
+
+    if (req.body.unis) {
+
+promises.push(dbQueryUniInput("other", "name"));
+promises.push(dbQueryUniInput("other", "organizer"));
+promises.push(dbQueryUniInput("other", "description"));
+promises.push(dbQueryUniInput("other", "place"));
+promises.push(dbQueryUniInput("other", "other"));
+promises.push(dbQueryUniInput("other", "link"));
+
+    }
+
+    if (req.body.places) {
+
+promises.push(dbQueryPlaceInput("other", "name"));
+promises.push(dbQueryPlaceInput("other", "organizer"));
+promises.push(dbQueryPlaceInput("other", "description"));
+promises.push(dbQueryPlaceInput("other", "place"));
+promises.push(dbQueryPlaceInput("other", "other"));
+promises.push(dbQueryPlaceInput("other", "link"));
+        }
+
+    if (req.body.terms) {
+
+promises.push(dbQueryTermsInput("other", "name"));
+promises.push(dbQueryTermsInput("other", "organizer"));
+promises.push(dbQueryTermsInput("other", "description"));
+promises.push(dbQueryTermsInput("other", "place"));
+promises.push(dbQueryTermsInput("other", "other"));
+promises.push(dbQueryTermsInput("other", "link"));
+            }
+
+
+
+}
+
+
+Promise.all(promises).then(values => {
+    console.log("globalResults in Promise.all", globalResults)
+    res.json(globalResults.filter(item => item.length))
+})
 
 // END if app.get below
 // a = [].concat.apply([], a);
