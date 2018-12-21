@@ -15,13 +15,13 @@ function Profile(props) {
         }
 
         { props.login &&
-            <h2 className="profile-text">Deine Account Informationen</h2>
+            <h2 className="profile-text">Your Account Information</h2>
         }
         { props.login &&
-            <h3 className="profile-text">Vorname: {props.first}</h3>
+            <h3 className="profile-text">First Name: {props.first}</h3>
         }
         { props.login &&
-            <h3 className="profile-text">Nachname: {props.last}</h3>
+            <h3 className="profile-text">Last Name: {props.last}</h3>
  }
         { props.login &&
             <Bio id="bio" bio={props.bio} setBio={props.setBio} />

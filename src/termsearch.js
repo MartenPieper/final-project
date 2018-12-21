@@ -13,7 +13,7 @@ const MyComponent = () => (
 
 export default connect()((props) => (
     <div>
-    <div className="input-title">Thema:</div>
+    <div className="input-title">Topic:</div>
   <Select
 
     isMulti

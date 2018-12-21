@@ -41,7 +41,7 @@ class SearchInput extends React.Component {
             <div className="searchinput-container">
 
                 <div className="heading-container">
-                <div className="input-heading">Auswahlmenü</div>
+                <div className="input-heading">Selection menu</div>
                 </div>
                 <MultipleSelect handleSearch={this.handleSearch}/>
                 <StudySearch handleSearch={this.handleSearch}/>
@@ -50,7 +50,7 @@ class SearchInput extends React.Component {
                 <TermSearch handleSearch={this.handleSearch}/>
                 <DetailedSearch />
                 <div className="heading-container">
-                <button onClick ={this.resetResults}>Zurücksetzen</button>
+                <button onClick ={this.resetResults}>Reset</button>
                         </div>
                 {this.props.isLoading && <div className="loading"></div>}
           </div>

@@ -98,13 +98,13 @@ function DetailedExpansionPanel(props) {
 
            {result.event_date &&
              <Typography className={classes.tertiaryHeading}>
-             Datum: {result.event_date}
+             Date: {result.event_date}
              </Typography>
             }
              <br/>
               {result.ts_event &&
              <Typography className={classes.tertiaryHeading}>
-             Gepostet: {result.ts_event}
+            Posted: {result.ts_event}
              </Typography>
             }
 
@@ -120,10 +120,10 @@ function DetailedExpansionPanel(props) {
 
            <div className={classNames(classes.column, classes.helper)}>
              <Typography className={classes.tertiaryHeading} variant="caption">
-               Interessiert?
+               Interested?
                <br />
                <a href={result.place} className={classes.link} target="_blank">
-                 Zur Webseite
+                 Go to Website
                </a>
              </Typography>
            </div>

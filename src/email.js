@@ -74,7 +74,7 @@ class EmailComponent extends React.Component {
             <div  className="email-container">
 
             <div>
-        
+
         </div>
             <Modal
           aria-labelledby="simple-modal-title"
@@ -85,7 +85,7 @@ class EmailComponent extends React.Component {
             <div className="closingbutton" onClick={this.props.hideEmail}>X</div>
             <br />
 
-                <h1>Email bei neuen Suchergebnissen?</h1>
+                <h1>Get an Email for new results?</h1>
                             <form className="form" onSubmit={this.handleSubmit}>
 
                             <div className="form__group">
@@ -99,7 +99,7 @@ class EmailComponent extends React.Component {
                             </div>
 
 
-                              <button className ="button-one">Anmelden</button>
+                              <button className ="button-one">Sign Up</button>
 
 
                             </form>

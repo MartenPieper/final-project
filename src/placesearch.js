@@ -15,7 +15,7 @@ const MyComponent = () => (
 
 export default connect()((props) => (
     <div>
-    <div className="input-title">Stadt/Ort:</div>
+    <div className="input-title">City:</div>
 
   <Select
 

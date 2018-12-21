@@ -8,15 +8,15 @@ export default class Typewriter extends Component {
         <div className="banner-container">
 
         <section className="wrapper">
-        <h1 className="heading-title">Mach mehr aus deinem Studium!</h1>
+        <h1 className="heading-title">Want to get the most out of your studies?!</h1>
 
-          <h2 className="sentence">Hier findest du die passenden
+          <h2 className="sentence">Here you can find the best
             <div className="slidingVertical">
               <span>Events</span>
               <span>Jobs</span>
-              <span>Onlinekurse</span>
-              <span>Stipendien</span>
-              <span>Freizeitangebote</span>
+              <span>MOOCs</span>
+              <span>Scholarships</span>
+              <span>Leisure activities</span>
             </div>
 
           </h2>

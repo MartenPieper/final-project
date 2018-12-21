@@ -304,27 +304,27 @@ var dbQueryTermsInput = (table, row) => {
 
 console.log(req.body.selections.includes('Events/ Veranstaltungen'))
 if (req.body.selections.includes('Events/ Veranstaltungen')) {
-    var baseUrl = `https://api.meetup.com/2/open_events?key=2c6569527c17491e136741596d14249&status=upcoming&sign=true&photo-host=public&country=de&page=20`
-    if (req.body.terms) {
-
-        // might have to do a for in loop to access all req.body.terms baseUrl += "&terms=" req.body.terms[elem]
-    //     console.log("req.body", req.body)
-        baseUrl += `&topic=${req.body.terms[0].topic}`
-
-        apiCall(baseUrl)
-    }
-
-    if (req.body.places && req.body.places[0].state) {
-
-        baseUrl += `&state=${req.body.places.state}`
-        apiCall(baseUrl)
-    }
-
-    if ( req.body.places && req.body.places[0].value) {
-
-        baseUrl += `&city=${req.body.places[0].value}`
-        apiCall(baseUrl)
-    }
+    // var baseUrl = `https://api.meetup.com/2/open_events?key=2c6569527c17491e136741596d14249&status=upcoming&sign=true&photo-host=public&country=de&page=20`
+    // if (req.body.terms) {
+    //
+    //     // might have to do a for in loop to access all req.body.terms baseUrl += "&terms=" req.body.terms[elem]
+    // //     console.log("req.body", req.body)
+    //     baseUrl += `&topic=${req.body.terms[0].topic}`
+    //
+    //     apiCall(baseUrl)
+    // }
+    //
+    // if (req.body.places && req.body.places[0].state) {
+    //
+    //     baseUrl += `&state=${req.body.places.state}`
+    //     apiCall(baseUrl)
+    // }
+    //
+    // if ( req.body.places && req.body.places[0].value) {
+    //
+    //     baseUrl += `&city=${req.body.places[0].value}`
+    //     apiCall(baseUrl)
+    // }
 
     // if (req.body.study) {
     //     baseUrl += `&topic=${req.body.terms[0].topic}`
@@ -332,82 +332,82 @@ if (req.body.selections.includes('Events/ Veranstaltungen')) {
 
     // console.log("baseUrl", baseUrl)
 
-    function apiCall(baseUrl) {
-    rp(baseUrl).then(function (results) {
-            // console.log('results:', results); // Print the HTML for the Google homepage.
-             var parsedResults = JSON.parse(results);
-            //  for (var i = 0; i < parsedResults.results.length; i++) {
-            //    console.log("i in parsedResults loop", i)
-            // }
-
-             for (var i in parsedResults.results) {
-                //  cleanedResults += sanitizeHtml(parsedResults.results.description);
-              parsedResults.results[i].description = sanitizeHtml(parsedResults.results[i].description, {allowedTags: [],
-                  allowedAttributes: {}})
-             // parsedResults.results[i].description = cheerio.load(parsedResults.results[i].description);
-             parsedResults.results[i].created = moment.unix(parsedResults.results[i].created / 1000).fromNow();
-
-              parsedResults.results[i].time = moment.unix(parsedResults.results[i].time / 1000).format("DD.MM.YYYY");
-             // .format("DD-MM-YYYY HH:mm")
-             // fromNow();
-             }
-
-             let tempArray = []
-             for (let data in parsedResults) {
-                 tempArray.push({
-        place: data['venue.city'],
-        link: data['event_url'],
-        event_data: data['time'],
-        creation_date: data['created']
-    })
-
-
-    // console.log("globalResults in API call", globalResults)
-}
-
-    globalResults.push(tempArray)
-        //      arr = []
-        //      arr.push(parsedResults)
-        //     // res.json(parsedResults)
-        //
-        //  testResults = [...globalResults, ...arr.map(result => {
-        //       return {
-        //            result['place'] = result['venue.city'];
-        //            result['link'] = result['event_url'];
-        //            result['event_date'] = result['time'];
-        //            result['creation_date'] = result['created'];
-        // // Assign key Value pairs
-        //    }
-        // })]
-
-// testResults = parsedResults.forEach( function(data) {
-//   data['place'] = data['venue.city'];
-//   delete data['venue.city'];
-//   data['link'] = data['event_url'];
-//   delete data['event_url'];
-//   data['event_date'] = data['time'];
-//   delete data['time'];
-//   data['creation_date'] = data['created'];
-//    delete data['created'];
-// });
-
-// for (let data in parsedResults) {
-//   data['place'] = data['venue.city'];
-//   data['link'] = data['event_url'];
-//   data['event_date'] = data['time'];
-//   data['creation_date'] = data['created'];
+//     function apiCall(baseUrl) {
+//     rp(baseUrl).then(function (results) {
+//             // console.log('results:', results); // Print the HTML for the Google homepage.
+//              var parsedResults = JSON.parse(results);
+//             //  for (var i = 0; i < parsedResults.results.length; i++) {
+//             //    console.log("i in parsedResults loop", i)
+//             // }
+//
+//              for (var i in parsedResults.results) {
+//                 //  cleanedResults += sanitizeHtml(parsedResults.results.description);
+//               parsedResults.results[i].description = sanitizeHtml(parsedResults.results[i].description, {allowedTags: [],
+//                   allowedAttributes: {}})
+//              // parsedResults.results[i].description = cheerio.load(parsedResults.results[i].description);
+//              parsedResults.results[i].created = moment.unix(parsedResults.results[i].created / 1000).fromNow();
+//
+//               parsedResults.results[i].time = moment.unix(parsedResults.results[i].time / 1000).format("DD.MM.YYYY");
+//              // .format("DD-MM-YYYY HH:mm")
+//              // fromNow();
+//              }
+//
+//              let tempArray = []
+//              for (let data in parsedResults) {
+//                  tempArray.push({
+//         place: data['venue.city'],
+//         link: data['event_url'],
+//         event_data: data['time'],
+//         creation_date: data['created']
+//     })
+//
+//
+//     // console.log("globalResults in API call", globalResults)
 // }
-
-// testResults.push(parsedResults);
-//             console.log("parsedResults in API call: ", parsedResults);
-//             console.log("testResults in API call: ", testResults);
-
-
-}).catch(function (error) {
-               console.log('error:', error); // Print the error if one occurred
-        })
-
-}
+//
+//     globalResults.push(tempArray)
+//         //      arr = []
+//         //      arr.push(parsedResults)
+//         //     // res.json(parsedResults)
+//         //
+//         //  testResults = [...globalResults, ...arr.map(result => {
+//         //       return {
+//         //            result['place'] = result['venue.city'];
+//         //            result['link'] = result['event_url'];
+//         //            result['event_date'] = result['time'];
+//         //            result['creation_date'] = result['created'];
+//         // // Assign key Value pairs
+//         //    }
+//         // })]
+//
+// // testResults = parsedResults.forEach( function(data) {
+// //   data['place'] = data['venue.city'];
+// //   delete data['venue.city'];
+// //   data['link'] = data['event_url'];
+// //   delete data['event_url'];
+// //   data['event_date'] = data['time'];
+// //   delete data['time'];
+// //   data['creation_date'] = data['created'];
+// //    delete data['created'];
+// // });
+//
+// // for (let data in parsedResults) {
+// //   data['place'] = data['venue.city'];
+// //   data['link'] = data['event_url'];
+// //   data['event_date'] = data['time'];
+// //   data['creation_date'] = data['created'];
+// // }
+//
+// // testResults.push(parsedResults);
+// //             console.log("parsedResults in API call: ", parsedResults);
+// //             console.log("testResults in API call: ", testResults);
+//
+//
+// }).catch(function (error) {
+//                console.log('error:', error); // Print the error if one occurred
+//         })
+//
+// }
 
         // Perfect query: const q = `
             // SELECT *
@@ -688,7 +688,7 @@ promises.push(dbQueryTermsInput("courses", "link"));
 }
 
 
-console.log("Query includes Kurse", req.body.selections.includes('Deals'))
+console.log("Query includes Deals", req.body.selections.includes('Deals'))
 
 if (req.body.selections.includes('Deals')) {
 

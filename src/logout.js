@@ -6,7 +6,7 @@ export default function Logout() {
         <div className="scene logout">
 
             <div className="cube">
-                <a href="/logout" className="front">Ausloggen</a>
+                <a href="/logout" className="front">Logout</a>
             </div>
         </div>
     );

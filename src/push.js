@@ -37,7 +37,7 @@ handleClick(e) {
 render() {
 return (
     <div>
-<button className="notification-button" onClick={this.handleClick}>Desktop Notification</button>
+<button className="desktop-button" onClick={this.handleClick}>Desktop Notification</button>
 </div>
 )
 }

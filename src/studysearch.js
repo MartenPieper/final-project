@@ -14,7 +14,7 @@ const MyComponent = () => (
 // 2. built data flow ending in defaultValue={lawAndEconomy[1]}
 export default connect()((props) => (
     <div>
-    <div className="input-title">Studium:</div>
+    <div className="input-title">Study:</div>
   <Select
 
     isMulti

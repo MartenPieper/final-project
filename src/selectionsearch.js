@@ -109,7 +109,7 @@ class MultipleSelect extends React.Component {
 
     return (
       <div className={classes.root}>
-      <div className="input-title">Was suchst du?</div>
+      <div className="input-title">What's your interest?</div>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="select-multiple-checkbox">Tag</InputLabel>
           <Select

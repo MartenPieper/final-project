@@ -81,7 +81,7 @@ class Login extends React.Component {
             <div className="closingbutton" onClick={this.props.hideLogin}>X</div>
             <br />
 
-                <h1>Hier Anmelden:</h1>
+                <h1>Sign In here:</h1>
                 <form className="form" onSubmit={this.handleSubmit}>
 
                             <div className="form__group">
@@ -107,7 +107,7 @@ class Login extends React.Component {
 
 
                             </form>
-                            <button onClick={()=>{this.props.hideLogin(); this.props.showRegistration()}}>To Registration</button>
+                            <button id="reg-redirect" onClick={()=>{this.props.hideLogin(); this.props.showRegistration()}}>To Registration</button>
 
 
 

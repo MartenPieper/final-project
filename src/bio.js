@@ -102,7 +102,7 @@ class Bio extends React.Component {
                 <h4>Über dich: {this.props.bio }</h4>
                 <div >
                     <div onClick={this.showBioEditor}>
-                    <button className="button-one">Bio Ändern</button>
+                    <button className="button-one">Edit Bio</button>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@ class Bio extends React.Component {
                     <div>
                         <div>
                             <div onClick={this.showBioEditor}>
-                            <button className="button-one">Bio hinzufügen</button>
+                            <button className="button-one">Add Bio</button>
                             </div>
                         </div>
                     </div>
@@ -134,7 +134,7 @@ class Bio extends React.Component {
                                   margin="normal"
                                   variant="outlined"
                                 />
-                        <button className="button-one">Senden</button>
+                        <button className="button-one">Send</button>
                         </form>
                     </div>
                 }
