@@ -102,9 +102,9 @@ function DetailedExpansionPanel(props) {
              </Typography>
             }
              <br/>
-              {result.ts_events &&
+              {result.ts_event &&
              <Typography className={classes.tertiaryHeading}>
-             Gepostet: {result.ts_events}
+             Gepostet: {result.ts_event}
              </Typography>
             }
 

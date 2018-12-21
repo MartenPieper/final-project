@@ -99,7 +99,7 @@ var testResults = [];
 
 app.post("/getSearchUpdate", (req, res) => {
     // console.log("req.body.places[0]", req.body.places[0].value)
-     console.log("req.body", req.body)
+    //  console.log("req.body", req.body)
 
 
 
@@ -152,7 +152,7 @@ var dbQueryNoInput = (table) => {
 
     fullQuery = `SELECT DISTINCT * FROM ${table}`
     return database.query(fullQuery).then(resp => {
-        console.log("resp.rows in db.query in dbQueryNoInput", resp.rows)
+        // console.log("resp.rows in db.query in dbQueryNoInput", resp.rows)
         globalResults.push(resp.rows);
         // console.log("globalResults in database.query", globalResults)
         // results are in resp.rows[0]
@@ -165,6 +165,7 @@ var dbQueryNoInput = (table) => {
 
 var dbQueryStudyInput = (table, row) => {
     let q = `SELECT DISTINCT * FROM ${table}`
+    let qEnd = ` LIMIT 100`
     let qWhere = ""
     let qIlike = ""
     let counter = 1
@@ -180,14 +181,14 @@ var dbQueryStudyInput = (table, row) => {
             counter++
         }
 
-        var fullQuery = q + qWhere + qIlike
+        var fullQuery = q + qWhere + qIlike + qEnd
 
         console.log("fullQuery in event db.query", fullQuery);
-        console.log("q in event db.query", q);
-        console.log("params in event db.query", params);
+        // console.log("q in event db.query", q);
+        // console.log("params in event db.query", params);
 
         return database.query(fullQuery, params).then(resp => {
-            console.log("resp.rows in db.query in dbQueryStudyInput", resp.rows)
+        //     console.log("resp.rows in db.query in dbQueryStudyInput", resp.rows)
             globalResults.push(resp.rows);
             // console.log("globalResults in database.query", globalResults)
             // results are in resp.rows[0]
@@ -199,6 +200,7 @@ var dbQueryStudyInput = (table, row) => {
 var dbQueryUniInput = (table, row) => {
 
         let q = `SELECT DISTINCT * FROM ${table}`
+        let qEnd = ` LIMIT 100`
         let qWhere = ""
         let qIlike = ""
         let counter = 1
@@ -216,11 +218,11 @@ var dbQueryUniInput = (table, row) => {
             counter++
         }
 
-        var fullQuery = q + qWhere + qIlike
+        var fullQuery = q + qWhere + qIlike + qEnd
 
         console.log("fullQuery in event db.query", fullQuery);
-        console.log("q in event db.query", q);
-        console.log("params in event db.query", params)
+        // console.log("q in event db.query", q);
+        // console.log("params in event db.query", params)
         return database.query(fullQuery, params).then(resp => {
             console.log("resp.rows in db.query in dbQueryUniInput", resp.rows)
             globalResults.push(resp.rows);
@@ -232,6 +234,7 @@ var dbQueryUniInput = (table, row) => {
 
 var dbQueryPlaceInput = (table, row) => {
         let q = `SELECT DISTINCT * FROM ${table}`
+        let qEnd = ` LIMIT 100`
         let qWhere = ""
         let qIlike = ""
         let counter = 1
@@ -247,14 +250,14 @@ var dbQueryPlaceInput = (table, row) => {
                 counter++
             }
 
-            var fullQuery = q + qWhere + qIlike
+            var fullQuery = q + qWhere + qIlike + qEnd
 
             console.log("fullQuery in event db.query", fullQuery);
-            console.log("q in event db.query", q);
-            console.log("params in event db.query", params);
+            // console.log("q in event db.query", q);
+            // console.log("params in event db.query", params);
 
             return database.query(fullQuery, params).then(resp => {
-                console.log("resp.rows in db.query in dbQueryPlaceInput", resp.rows)
+            //     console.log("resp.rows in db.query in dbQueryPlaceInput", resp.rows)
                 globalResults.push(resp.rows);
                 // console.log("globalResults in database.query", globalResults)
                 // results are in resp.rows[0]
@@ -265,6 +268,7 @@ var dbQueryPlaceInput = (table, row) => {
 
 var dbQueryTermsInput = (table, row) => {
     let q = `SELECT DISTINCT * FROM ${table}`
+    let qEnd = ` LIMIT 100`
     let qWhere = ""
     let qIlike = ""
     let counter = 1
@@ -280,14 +284,14 @@ var dbQueryTermsInput = (table, row) => {
             counter++
         }
 
-        var fullQuery = q + qWhere + qIlike
+        var fullQuery = q + qWhere + qIlike + qEnd
 
         console.log("fullQuery in event db.query", fullQuery);
-        console.log("q in event db.query", q);
-        console.log("params in event db.query", params);
+    //     console.log("q in event db.query", q);
+        // console.log("params in event db.query", params);
 
         return database.query(fullQuery, params).then(resp => {
-            console.log("resp.rows in db.query for dbQueryTermsInput", resp.rows)
+        //     console.log("resp.rows in db.query for dbQueryTermsInput", resp.rows)
             globalResults.push(resp.rows);
             // console.log("globalResults in database.query", globalResults)
             // results are in resp.rows[0]
@@ -348,9 +352,9 @@ if (req.body.selections.includes('Events/ Veranstaltungen')) {
              // fromNow();
              }
 
-
+             let tempArray = []
              for (let data in parsedResults) {
-                 globalResults.push({
+                 tempArray.push({
         place: data['venue.city'],
         link: data['event_url'],
         event_data: data['time'],
@@ -358,8 +362,10 @@ if (req.body.selections.includes('Events/ Veranstaltungen')) {
     })
 
 
-    console.log("globalResults in API call", globalResults)
+    // console.log("globalResults in API call", globalResults)
 }
+
+    globalResults.push(tempArray)
         //      arr = []
         //      arr.push(parsedResults)
         //     // res.json(parsedResults)
@@ -392,9 +398,9 @@ if (req.body.selections.includes('Events/ Veranstaltungen')) {
 //   data['creation_date'] = data['created'];
 // }
 
-testResults.push(parsedResults);
-            console.log("parsedResults in API call: ", parsedResults);
-            console.log("testResults in API call: ", testResults);
+// testResults.push(parsedResults);
+//             console.log("parsedResults in API call: ", parsedResults);
+//             console.log("testResults in API call: ", testResults);
 
 
 }).catch(function (error) {
@@ -493,7 +499,7 @@ promises.push(dbQueryTermsInput("events", "link"));
     // works for topic in console: /2/open_events?status=upcoming&sign=true&photo-host=public&country=de&topic=3d-artists&page=20
     // https://www.meetup.com/cities/de/berlin/
     }
-console.log("Query includes Jobs", req.body.selections.includes('Jobs'))
+// console.log("Query includes Jobs", req.body.selections.includes('Jobs'))
     if (req.body.selections.includes('Jobs')) {
 console.log("Jobs If Block running")
 
@@ -812,7 +818,24 @@ promises.push(dbQueryTermsInput("other", "link"));
 
 
 Promise.all(promises).then(values => {
-    console.log("globalResults in Promise.all", globalResults)
+console.log("globalResults in Promise.all", globalResults)
+
+globalResults.forEach(array => {
+    array.forEach(item => {
+        item.ts_event = moment(item.ts_event).fromNow();
+    })
+})
+
+    // for (var i in globalResults.results) {
+    //
+    // // parsedResults.results[i].description = cheerio.load(parsedResults.results[i].description);
+    // globalResults.results[i].ts_event = moment(globalResults.results[i].ts_event / 1000).fromNow();
+    //
+    // // parsedResults.results[i].time = moment.unix(parsedResults.results[i].time / 1000).format("DD.MM.YYYY");
+    // // .format("DD-MM-YYYY HH:mm")
+    // // fromNow();
+    // }
+
     res.json(globalResults.filter(item => item.length))
 })
 
@@ -886,7 +909,7 @@ app.post("/registration", (req, res) => {
 
 app.get("/reset", (req,res) => {
     globalResults = [];
-    console.log("globalResults after reset", globalResults)
+    // console.log("globalResults after reset", globalResults)
     res.json(globalResults);
 })
 

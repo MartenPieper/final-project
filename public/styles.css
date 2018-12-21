@@ -22,6 +22,16 @@ background-attachment: fixed;
 background-size: cover;
 }
 
+input {
+    padding: 5px;
+    border: 2px solid #ccc;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+input:focus {
+    border-color: #333;
+}
+
 .heading-container {
     text-align: center;
 }
