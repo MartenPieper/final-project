@@ -983,7 +983,10 @@ export const tech = [
     { value: 'cryptocurrency', label: 'cryptocurrency', topic: 'cryptocurrency'},
     { value: 'google', label: 'Google', topic: 'google'},
     { value: 'jquery', label: 'jQuery', topic: 'jquery'},
+    { value: 'funkychicken', label: 'Funky Chicken', topic: 'funkychicken'},
 ]
+
+
 
 export const environment = [
     { value: 'alternative energien', label: 'Alternative Energien', topic: 'alternativeenergy'},

@@ -23,7 +23,15 @@ const database = spicedPg(
     "postgres:postgres:postgres@localhost:5432/studentsite"
 );
 
+var redis = require('redis');
+var client = redis.createClient({
+    host: 'localhost',
+    port: 6379
+});
 
+client.on('error', function(err) {
+    console.log(err);
+});
 
 
 app.use(bodyParser.json());
@@ -72,11 +80,6 @@ app.use((req, res, next) => {
     res.cookie('mytoken', req.csrfToken());
     next();
 });
-
-// app.use(function(req, res, next) {
-//   res.locals.csrfToken = req.csrfToken();
-//   next();
-// });
 
 app.use(express.static("./public"));
 
@@ -839,8 +842,6 @@ globalResults.forEach(array => {
     res.json(globalResults.filter(item => item.length))
 })
 
-// END if app.get below
-// a = [].concat.apply([], a);
 })
 
 

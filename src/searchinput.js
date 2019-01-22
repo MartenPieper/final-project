@@ -15,7 +15,8 @@ class SearchInput extends React.Component {
         super(props)
         this.state = {}
         this.handleSearch = this.handleSearch.bind(this);
-            this.resetResults = this.resetResults.bind(this);
+        this.resetResults = this.resetResults.bind(this);
+        // this.getResults = this.getResults.bind(this);
     }
 
     handleSearch() {
@@ -50,7 +51,10 @@ class SearchInput extends React.Component {
                 <TermSearch handleSearch={this.handleSearch}/>
                 <DetailedSearch />
                 <div className="heading-container">
+
+                <button onClick ={this.handleSearch}>Start</button>
                 <button onClick ={this.resetResults}>Reset</button>
+
                         </div>
                 {this.props.isLoading && <div className="loading"></div>}
           </div>

@@ -82,7 +82,7 @@ class MultipleSelect extends React.Component {
     console.log("this.state in selectsearch", this.state);
 
     const action = this.props.dispatch(addSearchQuery("selections", event.target.value));
-    action.then(() => this.props.handleSearch())
+    // action.then(() => this.props.handleSearch())
 
 
   };

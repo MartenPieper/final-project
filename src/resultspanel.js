@@ -122,7 +122,7 @@ function DetailedExpansionPanel(props) {
              <Typography className={classes.tertiaryHeading} variant="caption">
                Interested?
                <br />
-               <a href={result.place} className={classes.link} target="_blank">
+               <a href={result.link} className={classes.link} target="_blank">
                  Go to Website
                </a>
              </Typography>

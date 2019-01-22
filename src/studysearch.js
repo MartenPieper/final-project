@@ -26,7 +26,7 @@ export default connect()((props) => (
     onChange = {(e) =>
         {
             const action = props.dispatch(addSearchQuery("study", e));
-        action.then(() => props.handleSearch())
+        // action.then(() => props.handleSearch())
     }}
   />
   </div>
